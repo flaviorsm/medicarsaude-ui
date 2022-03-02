@@ -1,0 +1,55 @@
+.login-rigth {
+  background-color: #b1d7ed;
+  padding: 0;
+  margin: 0;
+
+  .aside-img {
+    background: url(../../../assets/media/logos/medicar_logo_3.png) no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    top: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .login-rigth {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .login-content {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .login-content .login-form {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1399.98px) {
+  .login-rigth {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .login-content .login-form {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .aside-img {
+    min-height: 300px !important;
+    background-size: 400px;
+  }
+
+  .login-content .login-form {
+    width: 100%;
+    max-width: 100%;
+  }
+}

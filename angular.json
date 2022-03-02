@@ -15,7 +15,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "rts",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "medicarsaude-ui"
+  "defaultProject": "medicarsaude-ui",
+  "cli": {
+    "analytics": false
+  }
 }
