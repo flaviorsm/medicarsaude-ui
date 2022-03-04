@@ -8,7 +8,7 @@
         <h3>LOGIN</h3>
         <p class="text-muted font-weight-bold font-size-h4">
           Ou crie
-          <a [routerLink]="['/auth/cadastro']" class="text-primary font-weight-bolder" tabindex="1">
+          <a [routerLink]="['/auth/registrar']" class="text-primary font-weight-bolder" tabindex="1">
             uma conta
           </a>
         </p>
@@ -46,7 +46,7 @@
       <div class="container">
         <div class="col-md-12 text-center">
           <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
-        </div>  
+        </div>
       </div>
       <ng-container *ngIf="isLoading$ | async">
         <span class="spinner spinner-primary ml-5"></span>

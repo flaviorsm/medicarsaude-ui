@@ -7,9 +7,9 @@ export class UserModel {
     email: string;
     telefone: string;
     cpf: string;
-    usuario: string;
     senha: string;
-    dataNascimento: Date;
+    dataNascimento?: Date;
+    usuario?: string;
     status?: StatusEnum;
     regra?: RoleEnum;
 
