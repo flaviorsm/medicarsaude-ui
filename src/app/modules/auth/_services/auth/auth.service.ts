@@ -37,6 +37,10 @@ export class AuthService implements OnDestroy {
     this.unsubscribe.push(subscr);
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
+  }
+
   login(usuario: string, senha: string): Observable<AuthModel | {}> {
     this.isLoadingSubject.next(true);
     return this.http.post(`${environment.apiUrl}/login`, { usuario, senha }).pipe(
@@ -48,6 +52,18 @@ export class AuthService implements OnDestroy {
       catchError((err) => {
         console.error('err', err);
         return of({});
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
+  recuperar(email: string): Observable<boolean> {
+    this.isLoadingSubject.next(true);
+    return this.http.post(`${environment.apiUrl}/recuperar`, { email }).pipe(
+      map(() => true),
+      catchError((err) => {
+        console.error('err', err);
+        return of(false);
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
@@ -114,7 +130,5 @@ export class AuthService implements OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe.forEach((sb) => sb.unsubscribe());
-  }
+
 }

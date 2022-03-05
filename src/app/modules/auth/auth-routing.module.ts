@@ -1,3 +1,4 @@
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent, RegistrationComponent } from '.';
@@ -22,10 +23,10 @@ const routes: Routes = [
         path: 'registrar',
         component: RegistrationComponent
       },
-      // {
-      //   path: 'forgot-password',
-      //   component: ForgotPasswordComponent
-      // },
+      {
+        path: 'recuperar',
+        component: ForgotPasswordComponent
+      },
       // {
       //   path: 'logout',
       //   component: LogoutComponent

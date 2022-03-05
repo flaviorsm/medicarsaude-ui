@@ -1,15 +1,25 @@
 <div class="d-flex flex-column flex-root" style="height: 100%;">
     <div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
-        
-        <div class="login-content flex-row-fluid d-flex flex-column 
-                  justify-content-center position-relative overflow-hidden p-7 mx-auto">
-            <router-outlet></router-outlet>
+
+        <div
+            class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+            <div class="d-flex flex-center flex-column bd-highlight mb-3" style="height: 90vh;">
+
+                <div class="mb-auto p-2 bd-highlight">
+                    <img src="./assets/media/logos/medicar_logo_3-icone.png" />
+                </div>
+
+                <div class="p-2 bd-highlight container">
+                    <router-outlet></router-outlet>
+                </div>
+
+                <div class="mb-auto p-2 bd-highlight" style="height: 10vh;"></div>
+
+            </div>
         </div>
-        
+
         <div class="login-rigth d-flex flex-column flex-row-auto">
             <div class="aside-img d-flex flex-row-fluid"></div>
         </div>
-
-        
     </div>
 </div>

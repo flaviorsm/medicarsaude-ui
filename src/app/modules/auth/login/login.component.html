@@ -1,64 +1,53 @@
-<div class="d-flex flex-center flex-column bd-highlight mb-3" style="height: 90vh;">
-  <div class="mb-auto p-2 bd-highlight">
-    <img src="./../../../../assets/media/logos/medicar_logo_3-icone.png" />
+<form class="form flex-center" novalidate="novalidate" [formGroup]="loginForm" (ngSubmit)="logar()">
+  <div class="pb-13 pt-lg-0 pt-5 text-center">
+    <h3>LOGIN</h3>
+    <p class="text-muted font-weight-bold font-size-h4">
+      Ou crie
+      <a [routerLink]="['/auth/registrar']" class="text-primary font-weight-bolder" tabindex="1">
+        uma conta
+      </a>
+    </p>
   </div>
-  <div class="p-2 bd-highlight container">
-    <form class="form flex-center" novalidate="novalidate" [formGroup]="loginForm" (ngSubmit)="logar()">
-      <div class="pb-13 pt-lg-0 pt-5 text-center">
-        <h3>LOGIN</h3>
-        <p class="text-muted font-weight-bold font-size-h4">
-          Ou crie
-          <a [routerLink]="['/auth/registrar']" class="text-primary font-weight-bolder" tabindex="1">
-            uma conta
-          </a>
-        </p>
-      </div>
-      <div class="form-group row">
-        <label for="usuario" class="font-size-h6 font-weight-bolder text-dark pt-5">Usuário</label>
-        <input #usuario id="usuario" class="form-control form-control-solid h-auto py-6 rounded-lg" type="text"
-          name="usuario" formControlName="usuario" autocomplete="off" required
-          [ngClass]="{ 'is-invalid': f.usuario.errors && isValidFormSubmitted }" tabindex="1" />
-        <div *ngIf="f.usuario.errors && isValidFormSubmitted" class="alert">
-          <div *ngIf="f.usuario.errors.required">
-            <span>Campo Obrigatório</span>
-          </div>
+  <div class="form-group row">
+    <div class="col-12">
+      <label for="usuario" class="font-size-h6 font-weight-bolder text-dark pt-5">Usuário</label>
+      <input #usuario id="usuario" class="form-control form-control-solid h-auto py-6 rounded-lg" type="text"
+        name="usuario" formControlName="usuario" autocomplete="off" required
+        [ngClass]="{ 'is-invalid': f.usuario.errors && isValidFormSubmitted }" tabindex="1" />
+      <div *ngIf="f.usuario.errors && isValidFormSubmitted" class="alert">
+        <div *ngIf="f.usuario.errors.required">
+          <span>Campo Obrigatório</span>
         </div>
       </div>
-      <div class="form-group row">
-        <div class="d-flex justify-content-between mt-n5 col-12">
-          <label for="senha" class="font-size-h6 font-weight-bolder text-dark pt-5">
-            Senha
-          </label>
-          <a [routerLink]="['/auth/recuperar']" tabindex="4" class="text-primary font-weight-bolder text-end">
-            Esqueci a senha?
-          </a>
-        </div>
-        <input id="senha" class="form-control form-control-solid h-auto py-6 rounded-lg" type="password" name="senha"
-          autocomplete="off" required formControlName="senha"
-          [ngClass]="{ 'is-invalid': f.senha.errors && isValidFormSubmitted }" tabindex="2" />
-        <div *ngIf="f.senha.errors && isValidFormSubmitted" class="alert">
-          <div *ngIf="f.senha.errors.required">
-            <span>Campo Obrigatório</span>
-          </div>
-        </div>
-
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between mt-n5">
+        <label for="senha" class="font-size-h6 font-weight-bolder text-dark pt-5">
+          Senha
+        </label>
+        <a [routerLink]="['/auth/recuperar']" tabindex="4" class="text-primary font-weight-bolder text-end">
+          Esqueci a senha?
+        </a>
       </div>
-      <div class="container">
-        <div class="col-md-12 text-center">
-          <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+      <input id="senha" class="form-control form-control-solid h-auto py-6 rounded-lg" type="password" name="senha"
+        autocomplete="off" required formControlName="senha"
+        [ngClass]="{ 'is-invalid': f.senha.errors && isValidFormSubmitted }" tabindex="2" />
+      <div *ngIf="f.senha.errors && isValidFormSubmitted" class="alert">
+        <div *ngIf="f.senha.errors.required">
+          <span>Campo Obrigatório</span>
         </div>
       </div>
-      <ng-container *ngIf="isLoading$ | async">
+    </div>
+  </div>
+  <div class="container">
+    <div class="col-md-12 text-center" >
+      <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+      <ng-container *ngIf="isLoading$ | async;">
         <span class="spinner spinner-primary ml-5"></span>
       </ng-container>
-    </form>
+    </div>
+    
   </div>
-
-  <div class="mt-auto p-2 bd-highlight">Flex item</div>
-</div>
-
-<ng-container *ngIf="hasError">
-  <div class="mb-10 alert alert-custom alert-light-danger alert-dismissible">
-    <div class="alert-text">loginAlerta</div>
-  </div>
-</ng-container>
+</form>
