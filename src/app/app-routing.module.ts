@@ -11,8 +11,8 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    redirectTo: 'auth',
-    pathMatch: 'full',
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   { path: '**', redirectTo: 'error/404' },
 ];

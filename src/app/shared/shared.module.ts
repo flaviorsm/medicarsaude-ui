@@ -1,13 +1,15 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
-import { MaskDirective } from './directive/mask/mask.directive';
+import { HeaderComponent, MenuComponent, SplashScreenComponent } from './components';
+import { MaskDirective } from './directive';
 
 @NgModule({
   declarations: [
+    MaskDirective,
     SplashScreenComponent,
-    MaskDirective
+    HeaderComponent,
+    MenuComponent
   ],
   imports: [
     FormsModule,
@@ -18,6 +20,8 @@ import { MaskDirective } from './directive/mask/mask.directive';
     SplashScreenComponent,
     ReactiveFormsModule,
     MaskDirective,
+    HeaderComponent,
+    MenuComponent,
   ]
 })
 export class SharedModule { }

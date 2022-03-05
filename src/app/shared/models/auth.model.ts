@@ -1,4 +1,4 @@
-import { RoleEnum } from '@medicar/shared/enums/role.enum';
+import { RoleEnum } from '@medicar/shared';
 
 export class AuthModel {
     userId?: string;

@@ -2,8 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
-import { UserModel } from '@medicar/models';
-import { AuthModel } from '@medicar/models/auth.model';
+import { AuthModel, UserModel } from '@medicar/shared';
 import { Subscription, Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 
@@ -30,7 +29,7 @@ export class AuthService implements OnDestroy {
 
   constructor(private http: HttpClient, private router: Router) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
-    this.currentUserSubject = new BehaviorSubject<UserModel>({} as UserModel);
+    this.currentUserSubject = new BehaviorSubject<any>(undefined);
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.isLoading$ = this.isLoadingSubject.asObservable();
     const subscr = this.getUserByToken().subscribe();

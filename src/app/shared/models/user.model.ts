@@ -1,5 +1,4 @@
-import { RoleEnum } from '@medicar/shared/enums/role.enum';
-import { StatusEnum } from '@medicar/shared/enums/status.enum';
+import { RoleEnum, StatusEnum } from '@medicar/shared';
 
 export class UserModel {
     id?: string;

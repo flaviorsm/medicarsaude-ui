@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { SplashScreenService } from './shared/services/splash-screen/splash-screen.service';
+import { SplashScreenService } from '@medicar/shared/services';
 
 @Component({
   selector: 'app-root',
