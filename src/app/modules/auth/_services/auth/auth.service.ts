@@ -94,6 +94,11 @@ export class AuthService implements OnDestroy {
         }
         return user;
       }),
+      catchError((err) => {
+        console.error('err', err);
+        this.logout();
+        return of({});
+      }),
         finalize(() => this.isLoadingSubject.next(false))
       );
   }
