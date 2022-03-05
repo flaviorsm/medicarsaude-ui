@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from '@medicar/models';
+import * as moment from 'moment';
 import { Observable, Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../_services';
@@ -16,6 +17,7 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   hasError: boolean;
   isLoading$: Observable<boolean>;
+  message: string;
 
   private unsubscribe: Subscription[] = [];
 
@@ -27,6 +29,7 @@ export class RegistrationComponent implements OnInit {
     this.isLoading$ = this.authService.isLoading$;
     this.registrationForm = {} as FormGroup;
     this.hasError = false;
+    this.message = '';
   }
 
   ngOnInit(): void {
@@ -40,10 +43,10 @@ export class RegistrationComponent implements OnInit {
   initForm(): void {
     this.registrationForm = this.fb.group({
       nome: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      telefone: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      dataNascimento: ['', [Validators.required, this.isValidDate]],
+      telefone: ['', [Validators.required, Validators.pattern(/^(\d{0,2})(\d{0,5})(\d{0,4})/g)]],
       cpf: ['', [Validators.required]],
-      dataNascimento: ['', [Validators.required]],
       senha: ['', [Validators.required]],
       confirmaSenha: ['', [Validators.required]],
     });
@@ -51,7 +54,7 @@ export class RegistrationComponent implements OnInit {
 
   registrar(): void {
     this.hasError = false;
-    if (this.registrationForm.valid) {
+    if (this.registrationForm.valid && this.confirmaSenha()) {
       const newUser = new UserModel({
         nome: this.f.nome.value,
         cpf: this.f.cpf.value,
@@ -73,6 +76,31 @@ export class RegistrationComponent implements OnInit {
           }
         });
       this.unsubscribe.push(registrationSubscr);
+    } else {
+      this.hasError = true;
+      this.message = 'Preencha todos os campos!';
     }
+  }
+
+  private confirmaSenha(): boolean {
+    const senha = this.f.senha.value;
+    const cSenha = this.f.confirmaSenha.value;
+
+    if (senha !== cSenha) {
+      this.hasError = true;
+      this.message = 'Senha não conferi!';
+      return false;
+    }
+
+    return true;
+  }
+
+  isValidDate(c: FormControl): ValidationErrors {
+    let result = {} as ValidationErrors;
+    const isValid = moment(c.value, 'DD/MM/YYYY').isValid();
+    if (!isValid) {
+        result = { invalidDate: 'Invalid date' };
+    }
+    return result;
   }
 }

@@ -3,18 +3,25 @@
         <img src="./../../../../assets/media/logos/medicar_logo_3-icone.png" />
     </div>
     <div class="p-2 bd-highlight container">
+        <ng-container *ngIf="hasError">
+            <div class="mb-10 alert alert-custom alert-light-danger alert-dismissible">
+                <div class="alert-text">{{ message }}</div>
+            </div>
+        </ng-container>
         <form class="form flex-center" novalidate="novalidate" [formGroup]="registrationForm" (ngSubmit)="registrar()">
             <div class="pb-13 pt-lg-0 pt-5 text-center">
                 <h3>CRIAR CONTA</h3>
             </div>
             <div class="form-group row">
-                <label for="nome" class="font-weight-bolder text-dark">Nome</label>
-                <input #nome id="nome" class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                <div class="col-12">
+                    <label for="nome" class="font-weight-bolder text-dark">Nome</label>
+                    <input #nome id="nome" class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
                     type="text" name="nome" formControlName="nome" autocomplete="off" required
                     [ngClass]="{ 'is-invalid': f.nome.invalid && f.nome.touched }" tabindex="1" />
-                <div *ngIf="f.nome.invalid && f.nome.touched" class="alert">
-                    <div *ngIf="f.nome.errors.required">
-                        <span>Campo Obrigatório</span>
+                    <div *ngIf="f.nome.invalid && f.nome.touched" class="alert">
+                        <div *ngIf="f.nome.errors.required">
+                            <span>Campo Obrigatório</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,19 +35,26 @@
                         [ngClass]="{ 'is-invalid': f.email.invalid && f.email.touched }" tabindex="2" />
                     <div *ngIf="f.email.invalid && f.email.touched" class="alert">
                         <div *ngIf="f.email.errors.required">
-                            <span>Campo Obrigatório</span>
+                            <span>E-mail obrigatório!</span>
+                        </div>
+                        <div *ngIf="f.email.errors.email">
+                            <span>E-mail inválido!</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <label for="dataNascimento" class="font-weight-bolder text-dark">Data de Nascimento</label>
-                    <input #dataNascimento id="dataNascimento"
+                    <input #dataNascimento id="dataNascimento" rtsMask="00/00/0000"
                         class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6" type="text"
                         name="dataNascimento" formControlName="dataNascimento" autocomplete="off" required
-                        [ngClass]="{ 'is-invalid': f.dataNascimento.invalid && f.dataNascimento.touched }" tabindex="3" />
+                        [ngClass]="{ 'is-invalid': f.dataNascimento.invalid && f.dataNascimento.touched }"
+                        tabindex="3" />
                     <div *ngIf="f.dataNascimento.invalid && f.dataNascimento.touched" class="alert">
                         <div *ngIf="f.dataNascimento.errors.required">
-                            <span>Campo Obrigatório</span>
+                            <span>Data obrigatória!</span>
+                        </div>
+                        <div *ngIf="f.dataNascimento.errors.invalidDate">
+                            <span>Data inválida!</span>
                         </div>
                     </div>
                 </div>
@@ -50,7 +64,7 @@
             <div class="form-group row">
                 <div class="col-6">
                     <label for="telefone" class="font-weight-bolder text-dark">Telefone</label>
-                    <input #telefone id="telefone"
+                    <input #telefone id="telefone" rtsMask="(00)00000-0000"
                         class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6" type="tel"
                         name="telefone" formControlName="telefone" autocomplete="off" required
                         [ngClass]="{ 'is-invalid': f.telefone.invalid && f.telefone.touched }" tabindex="4" />
@@ -62,7 +76,7 @@
                 </div>
                 <div class="col-6">
                     <label for="cpf" class="font-weight-bolder text-dark">CPF</label>
-                    <input #cpf id="cpf"
+                    <input #cpf id="cpf" rtsMask="000.000.000-00"
                         class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6" type="text"
                         name="cpf" formControlName="cpf" autocomplete="off" required
                         [ngClass]="{ 'is-invalid': f.cpf.invalid && f.cpf.touched }" tabindex="5" />
@@ -81,11 +95,6 @@
                     <input id="senha" class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
                         type="password" name="senha" autocomplete="off" required formControlName="senha"
                         [ngClass]="{ 'is-invalid': f.senha.invalid && f.senha.touched }" tabindex="6" />
-                    <div *ngIf="f.senha.invalid && f.senha.touched" class="alert">
-                        <div *ngIf="f.senha.errors.required">
-                            <span>Campo Obrigatório</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-6">
                     <label for="confirmaSenha" class="font-weight-bolder text-dark">Confirma Senha</label>
@@ -93,11 +102,6 @@
                         class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6" type="password"
                         name="confirmaSenha" autocomplete="off" required formControlName="confirmaSenha"
                         [ngClass]="{ 'is-invalid': f.confirmaSenha.invalid && f.confirmaSenha.touched }" tabindex="7" />
-                    <div *ngIf="f.confirmaSenha.invalid && f.confirmaSenha.touched" class="alert">
-                        <div *ngIf="f.confirmaSenha.errors.required">
-                            <span>Campo Obrigatório</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 

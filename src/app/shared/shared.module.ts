@@ -2,9 +2,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
+import { MaskDirective } from './directive/mask/mask.directive';
 
 @NgModule({
-  declarations: [SplashScreenComponent],
+  declarations: [
+    SplashScreenComponent,
+    MaskDirective
+  ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -13,6 +17,7 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
   exports: [
     SplashScreenComponent,
     ReactiveFormsModule,
+    MaskDirective,
   ]
 })
 export class SharedModule { }

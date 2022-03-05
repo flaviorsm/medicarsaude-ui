@@ -9,7 +9,7 @@ export class UserModel {
     cpf: string;
     senha: string;
     dataNascimento?: Date;
-    usuario?: string;
+    usuario: string;
     status?: StatusEnum;
     regra?: RoleEnum;
 
