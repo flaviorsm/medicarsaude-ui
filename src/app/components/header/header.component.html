@@ -14,8 +14,8 @@
         <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown"><i class="bi bi-person-fill"></i>Usuário
           Logado</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" routerLink="/usuario/">Editar</a>
-          <a class="dropdown-item" (click)="logout()">Sair</a>
+          <a class="dropdown-item" [routerLink]="['/usuario/']">Editar</a>
+          <a class="dropdown-item" [routerLink]="['/auth/logout']">Sair</a>
         </div>
       </div>
     </div>

@@ -10,6 +10,9 @@ export class LogoutComponent implements OnInit {
 
   constructor(authService: AuthService) {
     authService.logout();
+    setTimeout(() => {
+      window.location.reload();
+    });
   }
 
   ngOnInit(): void {

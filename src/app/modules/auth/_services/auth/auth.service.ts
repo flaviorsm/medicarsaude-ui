@@ -20,7 +20,7 @@ export class AuthService implements OnDestroy {
   isLoadingSubject: BehaviorSubject<boolean>;
 
   get currentUserValue(): UserModel {
-    return {} as UserModel; // this.currentUserSubject.value;
+    return this.currentUserSubject.value;
   }
 
   set currentUserValue(user: UserModel) {
@@ -73,7 +73,6 @@ export class AuthService implements OnDestroy {
     this.router.navigate(['/auth/login'], {
       queryParams: {},
     });
-    window.location.reload();
   }
 
   getUserByToken(): Observable<UserModel | {}> {
@@ -94,11 +93,11 @@ export class AuthService implements OnDestroy {
         }
         return user;
       }),
-      catchError((err) => {
-        console.error('err', err);
-        this.logout();
-        return of({});
-      }),
+        catchError((err) => {
+          console.error('err', err);
+          this.logout();
+          return of({});
+        }),
         finalize(() => this.isLoadingSubject.next(false))
       );
   }

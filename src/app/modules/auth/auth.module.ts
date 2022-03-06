@@ -15,7 +15,7 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     RegistrationComponent,
     ForgotPasswordComponent,
-    LogoutComponent
+    LogoutComponent,
   ],
   imports: [
     CommonModule,
