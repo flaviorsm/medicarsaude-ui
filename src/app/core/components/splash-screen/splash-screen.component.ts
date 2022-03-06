@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SplashScreenService } from '@medicar/shared/services';
+import { SplashScreenService } from '@medicar/core/services';
 
 @Component({
   selector: 'rts-splash-screen',

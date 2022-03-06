@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserModel } from '@medicar/shared';
+import { UserModel } from '@medicar/core';
 import * as moment from 'moment';
 import { Observable, Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';

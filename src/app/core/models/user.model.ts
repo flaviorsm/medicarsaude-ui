@@ -1,4 +1,4 @@
-import { RoleEnum, StatusEnum } from '@medicar/shared';
+import { RoleEnum, StatusEnum } from '@medicar/core';
 
 export class UserModel {
     id?: string;

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
-import { AuthModel, UserModel } from '@medicar/shared';
+import { AuthModel, UserModel } from '@medicar/core';
 import { Subscription, Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 
