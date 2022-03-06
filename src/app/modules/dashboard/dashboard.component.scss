@@ -1,0 +1,25 @@
+.box {
+    height: 50vh;
+    padding: 15px;
+}
+
+.box-2 {
+    height: 55vh;
+    padding: 15px;
+}
+
+.space-top {
+    margin-top: 10px;
+}
+
+.card-title {
+    h2 {
+        font-size: large;
+        font-weight: 700;
+        line-height: 0.5;
+    }
+    span {
+        font-size: larger;
+        color: var(--gray-dark);
+    }
+}
