@@ -1,0 +1,25 @@
+.bg-light {
+    background-color: #ffffff !important;
+    padding: 0 8vw;
+    min-height: 12vh;
+}
+
+.item-menu {
+    div {
+        color: var(--primary);
+        cursor: pointer;
+    }
+
+    div:hover {
+        color: var(--green);
+    }
+
+    span {
+        font-size: x-small;
+        color: var(--gray-dark);
+    }
+
+    .active {
+        color: var(--green);
+    }
+}

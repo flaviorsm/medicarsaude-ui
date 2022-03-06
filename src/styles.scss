@@ -1,8 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700");
-
-// => Material
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-
+@import '~bootstrap/dist/css/bootstrap.min.css';
 @import "./assets/scss/style.bundle.scss";
+
+:root {
+  --bg-color: #FBF6F0;
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #ffffff;
+  --gray: #7E8299;
+  --gray-dark: #3F4254;
+  --primary: #3699FF;
+  --secondary: #296870;
+  --success: #1BC5BD;
+  --info: #8950FC;
+  --warning: #FFA800;
+  --danger: #F64E60;
+  --light: #F3F6F9;
+  --dark: #181C32;
+  --white: #ffffff;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+body {
+  margin: 0;
+  font-family: Poppins, Helvetica, "sans-serif";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gray-dark);
+  text-align: left;
+  background-color: var(--bg-color);
+}

@@ -1,64 +1,9 @@
 @charset "UTF-8";
 
-:root {
-  --blue: #007bff;
-  --indigo: #6610f2;
-  --purple: #6f42c1;
-  --pink: #e83e8c;
-  --red: #dc3545;
-  --orange: #fd7e14;
-  --yellow: #ffc107;
-  --green: #28a745;
-  --teal: #20c997;
-  --cyan: #17a2b8;
-  --white: #ffffff;
-  --gray: #7E8299;
-  --gray-dark: #3F4254;
-  --primary: #3699FF;
-  --secondary: #296870;
-  --success: #1BC5BD;
-  --info: #8950FC;
-  --warning: #FFA800;
-  --danger: #F64E60;
-  --light: #F3F6F9;
-  --dark: #181C32;
-  --white: #ffffff;
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-  --breakpoint-xxl: 1400px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
-  display: block;
-}
-
-body {
-  margin: 0;
-  font-family: Poppins, Helvetica, "sans-serif";
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--gray-dark);
-  text-align: left;
-  background-color: #ffffff;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -52823,7 +52768,7 @@ button {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 .btn-group.dropright > .btn.dropdown-toggle:after {
@@ -52837,7 +52782,6 @@ button {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
   content: "";
 }
 .btn-group.dropleft > .btn {
@@ -59899,11 +59843,7 @@ code {
   line-height: 0;
   vertical-align: middle;
 }
-.dropdown-menu .dropdown-menu:not(.daterangepicker) {
-  /*rtl:raw:
-  left: auto !important;
-  */
-}
+
 .dropdown-menu.dropdown-menu-anim-up {
   animation: animation-dropdown-menu-fade-in 0.3s ease 1, animation-dropdown-menu-move-up 0.3s ease-out 1;
 }
@@ -60548,13 +60488,6 @@ code {
 
 .table:not(.table-bordered) thead th, .table:not(.table-bordered) thead td {
   border-top: 0;
-}
-
-.popover {
-  /*rtl:raw:
-  left: 0 !important;
-  right: auto !important;
-  */
 }
 .popover .popover-header {
   font-size: 1rem;
@@ -73446,7 +73379,7 @@ code {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 .bootstrap-select > .dropdown-toggle:before {
@@ -73523,7 +73456,7 @@ code {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 .bootstrap-select .dropdown-menu.inner > li.selected > a .check-mark:after {
@@ -74113,7 +74046,7 @@ code {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 .dataTables_wrapper .child .dtr-details {
@@ -74602,7 +74535,7 @@ code {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 .fc-unthemed .fc-toolbar .fc-button .fc-icon.fc-icon-right-single-arrow {
@@ -74616,7 +74549,7 @@ code {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 .fc-unthemed .fc-axis > span {
@@ -76233,7 +76166,7 @@ code {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
   font-size: 0.6rem;
   color: #7E8299;
@@ -76274,7 +76207,7 @@ code {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
   font-size: 0.6rem;
   color: #7E8299;
@@ -76624,7 +76557,7 @@ body.swal2-height-auto {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
   font-size: 0.6rem;
   color: #B5B5C3;
@@ -77077,7 +77010,7 @@ body.swal2-height-auto {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
   font-size: 0.9rem;
 }
@@ -77484,7 +77417,7 @@ body.swal2-height-auto {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 .example .example-toggle.example-toggled {
@@ -77511,7 +77444,7 @@ body.swal2-height-auto {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 .example .example-copy.example-copied {
@@ -78347,7 +78280,7 @@ body {
     text-transform: none;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
+  
     content: "";
   }
   [direction=rtl] .header-menu .menu-nav > .menu-item > .menu-link .menu-arrow:before {
@@ -78423,7 +78356,7 @@ body {
     text-transform: none;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
+  
     content: "";
   }
   [direction=rtl] .header-menu .menu-nav > .menu-item .menu-submenu > .menu-subnav > .menu-item > .menu-link .menu-arrow:before {
@@ -78524,7 +78457,7 @@ body {
     text-transform: none;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
+  
     content: "";
   }
   [direction=rtl] .header-menu .menu-nav > .menu-item .menu-submenu > .menu-subnav .menu-content .menu-inner > .menu-item > .menu-link .menu-arrow:before {
@@ -79154,7 +79087,7 @@ body {
     text-transform: none;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
+  
     content: "";
   }
   [direction=rtl] .header-menu-mobile .menu-nav > .menu-item > .menu-heading .menu-arrow:before,
@@ -79239,7 +79172,7 @@ body {
     text-transform: none;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
+  
     content: "";
   }
   [direction=rtl] .header-menu-mobile .menu-nav > .menu-item .menu-submenu .menu-item > .menu-heading .menu-arrow:before,
@@ -80157,7 +80090,7 @@ body {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 [direction=rtl] .aside-menu .menu-nav > .menu-item > .menu-heading .menu-arrow:before,
@@ -80244,7 +80177,7 @@ body {
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+
   content: "";
 }
 [direction=rtl] .aside-menu .menu-nav > .menu-item .menu-submenu .menu-item > .menu-heading .menu-arrow:before,
