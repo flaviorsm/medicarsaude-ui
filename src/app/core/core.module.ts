@@ -3,15 +3,19 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent, MenuComponent, SplashScreenComponent } from './components';
 import { MaskDirective } from './directives';
+import { TopbarComponent } from './components/topbar/topbar.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     MaskDirective,
     SplashScreenComponent,
     HeaderComponent,
-    MenuComponent
+    MenuComponent,
+    TopbarComponent,
   ],
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -22,6 +26,7 @@ import { MaskDirective } from './directives';
     MaskDirective,
     HeaderComponent,
     MenuComponent,
+    TopbarComponent,
   ]
 })
 export class CoreModule { }

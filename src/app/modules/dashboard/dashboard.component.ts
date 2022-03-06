@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'rts-dashboard',
@@ -7,14 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  logout() {
-
-  }
 
 }

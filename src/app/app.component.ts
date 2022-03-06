@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SplashScreenService } from '@medicar/core/services';
+import { AuthService } from './modules/auth/_services';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Subscription[] = [];
 
+
   constructor(
     private splashScreenService: SplashScreenService,
-    private router: Router,
+    private router: Router
   ) { }
+
 
   ngOnInit(): void {
     const routerSubscription = this.router.events.subscribe((event) => {

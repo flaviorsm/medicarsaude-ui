@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { CoreModule } from '@medicar/core/core.module';
-
+import { CommonModule } from '@angular/common';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -12,6 +12,7 @@ import { CoreModule } from '@medicar/core/core.module';
     CommonModule,
     DashboardRoutingModule,
     CoreModule,
+    NgChartsModule,
   ]
 })
 export class DashboardModule { }
