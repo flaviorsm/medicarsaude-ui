@@ -1,0 +1,85 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '@environments/environment';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, finalize, map } from 'rxjs/operators';
+import { IService } from '..';
+import { TokenStorageService } from '../services';
+
+export abstract class ServiceBase<T> implements IService<T>{
+
+    isLoadingSubject!: BehaviorSubject<boolean>;
+    private apiUrl = '';
+
+    constructor(
+        patchUrl: string,
+        private http: HttpClient,
+        private tokenStorageService: TokenStorageService) {
+        this.isLoadingSubject = new BehaviorSubject<boolean>(false);
+        this.apiUrl = `${environment.apiUrl}/${patchUrl}`;
+    }
+
+    get httpHeaders(): HttpHeaders | undefined {
+        const auth = this.tokenStorageService.getAuthLocalStorage();
+        if (auth && auth.token) {
+            return new HttpHeaders({
+                token: `${auth.token}`,
+            });
+        }
+        return undefined;
+    }
+
+    create(model: T): Observable<T | undefined> {
+        this.isLoadingSubject.next(true);
+        return this.http.post<any>(this.apiUrl, model, { headers: this.httpHeaders })
+            .pipe(
+                map(res => res.data),
+                catchError((err) => {
+                    console.error('Erro create', err);
+                    return of(undefined);
+                }),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+
+    find(field?: string, value?: string): Observable<any[] | undefined> {
+        if (field && value) {
+            this.apiUrl += `?%${field}=${value}`;
+        }
+        this.isLoadingSubject.next(true);
+        return this.http.get<any>(this.apiUrl, { headers: this.httpHeaders })
+            .pipe(
+                map(res => res.data),
+                catchError((err) => {
+                    console.error('Erro getVendas', err);
+                    return of(undefined);
+                }),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+
+    update(id: string, model: T): Observable<T | undefined> {
+        this.isLoadingSubject.next(true);
+        return this.http.put<any>(`${this.apiUrl}/${id}`, model, { headers: this.httpHeaders })
+            .pipe(
+                map(res => res.data),
+                catchError((err) => {
+                    console.error('Erro create', err);
+                    return of(undefined);
+                }),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+
+    delete(id: string): Observable<any> {
+        this.isLoadingSubject.next(true);
+        return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.httpHeaders })
+            .pipe(
+                map(res => res),
+                catchError((err) => {
+                    console.error('Erro getVendas', err);
+                    return of(undefined);
+                }),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+}

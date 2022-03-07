@@ -14,11 +14,17 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  {
+    path: 'venda',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/venda/venda.module').then((m) => m.VendaModule),
+  },
   { path: '**', redirectTo: 'error/404' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

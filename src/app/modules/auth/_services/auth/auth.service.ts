@@ -3,6 +3,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
 import { AuthModel, UserModel } from '@medicar/core';
+import { TokenStorageService } from '@medicar/core/services';
 import { Subscription, Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 
@@ -12,7 +13,6 @@ import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 export class AuthService implements OnDestroy {
 
   private unsubscribe: Subscription[] = [];
-  private localStorageSession = 'sessionId';
 
   currentUser$: Observable<UserModel>;
   isLoading$: Observable<boolean>;
@@ -27,7 +27,7 @@ export class AuthService implements OnDestroy {
     this.currentUserSubject.next(user);
   }
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private tokenStorageService: TokenStorageService) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<any>(undefined);
     this.currentUser$ = this.currentUserSubject.asObservable();
@@ -69,14 +69,14 @@ export class AuthService implements OnDestroy {
   }
 
   logout(): void {
-    localStorage.removeItem(this.localStorageSession);
+    this.tokenStorageService.removeAuth();
     this.router.navigate(['/auth/login'], {
       queryParams: {},
     });
   }
 
   getUserByToken(): Observable<UserModel | {}> {
-    const auth = this.getTokenLocalStorage();
+    const auth = this.tokenStorageService.getAuthLocalStorage();
     if (!auth || !auth.token) {
       return of({});
     }
@@ -119,20 +119,10 @@ export class AuthService implements OnDestroy {
 
   private setTokenLocalStorage(auth: AuthModel): boolean {
     if (auth && auth.token) {
-      localStorage.setItem(this.localStorageSession, JSON.stringify(auth));
+      this.tokenStorageService.setAuthLocalStorage(auth);
       return true;
     }
     return false;
   }
-
-  private getTokenLocalStorage(): AuthModel {
-    try {
-      const authData = JSON.parse(localStorage.getItem(this.localStorageSession) || '');
-      return authData;
-    } catch (error) {
-      return {};
-    }
-  }
-
 
 }
