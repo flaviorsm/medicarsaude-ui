@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
-import { AuthModel, UserModel } from '@medicar/core';
+import { AuthModel, UsuarioModel } from '@medicar/core';
 import { TokenStorageService } from '@medicar/core/services';
 import { Subscription, Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
@@ -10,20 +10,20 @@ import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnDestroy {
+export class AutenticacaoService implements OnDestroy {
 
   private unsubscribe: Subscription[] = [];
 
-  currentUser$: Observable<UserModel>;
+  currentUser$: Observable<UsuarioModel>;
   isLoading$: Observable<boolean>;
   currentUserSubject: BehaviorSubject<any>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
-  get currentUserValue(): UserModel {
+  get currentUserValue(): UsuarioModel {
     return this.currentUserSubject.value;
   }
 
-  set currentUserValue(user: UserModel) {
+  set currentUserValue(user: UsuarioModel) {
     this.currentUserSubject.next(user);
   }
 
@@ -32,7 +32,7 @@ export class AuthService implements OnDestroy {
     this.currentUserSubject = new BehaviorSubject<any>(undefined);
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.isLoading$ = this.isLoadingSubject.asObservable();
-    const subscr = this.getUserByToken().subscribe();
+    const subscr = this.obterUsuárioPorToken().subscribe();
     this.unsubscribe.push(subscr);
   }
 
@@ -44,10 +44,10 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
     return this.http.post(`${environment.apiUrl}/login`, { usuario, senha }).pipe(
       map(auth => {
-        const result = this.setTokenLocalStorage(auth);
+        const result = this.tokenStorageService.setAuthLocalStorage(auth);
         return result;
       }),
-      switchMap(() => this.getUserByToken()),
+      switchMap(() => this.obterUsuárioPorToken()),
       catchError((err) => {
         console.error('err', err);
         return of({});
@@ -75,7 +75,7 @@ export class AuthService implements OnDestroy {
     });
   }
 
-  getUserByToken(): Observable<UserModel | {}> {
+  obterUsuárioPorToken(): Observable<UsuarioModel | {}> {
     const auth = this.tokenStorageService.getAuthLocalStorage();
     if (!auth || !auth.token) {
       return of({});
@@ -84,10 +84,10 @@ export class AuthService implements OnDestroy {
       token: `${auth.token}`,
     });
     this.isLoadingSubject.next(true);
-    return this.http.get<UserModel>(`${environment.apiUrl}/usuarios/${auth.userId}`, { headers: httpHeaders })
-      .pipe(map((user: UserModel) => {
+    return this.http.get<UsuarioModel>(`${environment.apiUrl}/usuarios/${auth.userId}`, { headers: httpHeaders })
+      .pipe(map((user: UsuarioModel) => {
         if (user) {
-          this.currentUserSubject = new BehaviorSubject<UserModel>(user);
+          this.currentUserSubject = new BehaviorSubject<UsuarioModel>(user);
         } else {
           this.logout();
         }
@@ -102,7 +102,7 @@ export class AuthService implements OnDestroy {
       );
   }
 
-  registration(model: UserModel): Observable<any> {
+  cadastro(model: UsuarioModel): Observable<any> {
     this.isLoadingSubject.next(true);
     return this.http.post(`${environment.apiUrl}/usuarios`, model).pipe(
       map(() => {
@@ -115,14 +115,6 @@ export class AuthService implements OnDestroy {
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
-  }
-
-  private setTokenLocalStorage(auth: AuthModel): boolean {
-    if (auth && auth.token) {
-      this.tokenStorageService.setAuthLocalStorage(auth);
-      return true;
-    }
-    return false;
   }
 
 }

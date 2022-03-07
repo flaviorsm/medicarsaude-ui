@@ -1,6 +1,6 @@
-import { VendaService } from './../_services/venda.service';
 import { Component, OnInit } from '@angular/core';
 import { VendaModel } from '@medicar/core';
+import { VendaService } from '@medicar/core/services';
 
 @Component({
   selector: 'rts-lista',

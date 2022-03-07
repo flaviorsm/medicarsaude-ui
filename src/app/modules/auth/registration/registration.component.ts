@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserModel } from '@medicar/core';
+import { UsuarioModel } from '@medicar/core';
+import { AutenticacaoService } from '@medicar/core/services';
 import * as moment from 'moment';
 import { Observable, Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../_services';
 
 @Component({
   selector: 'rts-registration',
@@ -23,10 +23,10 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private autenticacaoService: AutenticacaoService,
     private router: Router
   ) {
-    this.isLoading$ = this.authService.isLoading$;
+    this.isLoading$ = this.autenticacaoService.isLoading$;
     this.registrationForm = {} as FormGroup;
     this.hasError = false;
     this.message = '';
@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
   registrar(): void {
     this.hasError = false;
     if (this.registrationForm.valid && this.confirmaSenha()) {
-      const newUser = new UserModel({
+      const newUser = new UsuarioModel({
         nome: this.f.nome.value,
         cpf: this.f.cpf.value,
         email: this.f.email.value,
@@ -65,10 +65,10 @@ export class RegistrationComponent implements OnInit {
         senha: this.f.senha.value,
       });
 
-      const registrationSubscr = this.authService
-        .registration(newUser)
+      const registrationSubscr = this.autenticacaoService
+        .cadastro(newUser)
         .pipe(first())
-        .subscribe((user: UserModel) => {
+        .subscribe((user: UsuarioModel) => {
           if (user) {
             this.router.navigate(['/']);
           } else {
@@ -99,7 +99,7 @@ export class RegistrationComponent implements OnInit {
     let result = {} as ValidationErrors;
     const isValid = moment(c.value, 'DD/MM/YYYY').isValid();
     if (!isValid) {
-        result = { invalidDate: 'Invalid date' };
+      result = { invalidDate: 'Invalid date' };
     }
     return result;
   }

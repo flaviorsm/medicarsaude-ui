@@ -1,6 +1,6 @@
 import { RoleEnum, StatusEnum } from '@medicar/core';
 
-export class UserModel {
+export class UsuarioModel {
     id?: string;
     nome: string;
     email: string;
@@ -12,7 +12,7 @@ export class UserModel {
     status?: StatusEnum;
     regra?: RoleEnum;
 
-    constructor(model: UserModel) {
+    constructor(model: UsuarioModel) {
         this.nome = model.nome;
         this.email = model.email;
         this.cpf = model.cpf;

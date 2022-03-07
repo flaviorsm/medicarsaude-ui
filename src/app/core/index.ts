@@ -1,6 +1,6 @@
 // Models
 export * from './models/auth.model';
-export * from './models/user.model';
+export * from './models/usuario.model';
 export * from './models/venda.model';
 
 // Enums
