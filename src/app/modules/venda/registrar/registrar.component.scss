@@ -1,5 +1,13 @@
 hr {
     padding: 0;
-    margin: 0;
-    border: thin;
+    margin: 10px;
+    border: thin solid #ECF0F3;
+}
+
+.card-body h2 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 20px;
 }
