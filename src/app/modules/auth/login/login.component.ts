@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AutenticacaoService } from '@medicar/core/services';
 import { Observable, Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../_services';
 @Component({
   selector: 'rts-login',
   templateUrl: './login.component.html',
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private authService: AutenticacaoService,
     private route: ActivatedRoute,
     private router: Router
   ) {

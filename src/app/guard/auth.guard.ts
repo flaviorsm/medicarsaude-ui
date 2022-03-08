@@ -1,6 +1,6 @@
+import { AutenticacaoService } from '@medicar/core/services';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { AuthService } from '@medicar/modules/auth/_services';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AutenticacaoService) { }
 
     canActivate(
         route: ActivatedRouteSnapshot,

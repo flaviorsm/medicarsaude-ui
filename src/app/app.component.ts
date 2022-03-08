@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SplashScreenService } from '@medicar/core/services';
-import { AuthService } from './modules/auth/_services';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,7 @@ import { AuthService } from './modules/auth/_services';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'medicarsaude-ui';
+  title = 'Medicar';
 
   private unsubscribe: Subscription[] = [];
 

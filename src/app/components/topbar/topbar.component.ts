@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@medicar/modules/auth/_services';
+import { AutenticacaoService } from '@medicar/core/services';
 
 @Component({
   selector: 'rts-topbar',
@@ -8,7 +8,7 @@ import { AuthService } from '@medicar/modules/auth/_services';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AutenticacaoService) { }
 
   ngOnInit(): void {
   }

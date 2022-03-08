@@ -11,11 +11,12 @@ export abstract class ServiceBase<T> implements IService<T>{
     private apiUrl = '';
 
     constructor(
-        patchUrl: string,
+        pathApi: string,
         private http: HttpClient,
         private tokenStorageService: TokenStorageService) {
         this.isLoadingSubject = new BehaviorSubject<boolean>(false);
-        this.apiUrl = `${environment.apiUrl}/${patchUrl}`;
+
+        this.apiUrl = `${environment.apiUrl}/${pathApi}`;
     }
 
     get httpHeaders(): HttpHeaders | undefined {
@@ -41,7 +42,12 @@ export abstract class ServiceBase<T> implements IService<T>{
             );
     }
 
-    find(field?: string, value?: string): Observable<any[] | undefined> {
+    findById(id: string): Observable<T | undefined> {
+        return this.find('id', id).pipe(
+            map(res => res && res.length > 0 ? res[0] : undefined));
+    }
+
+    find(field?: string, value?: string): Observable<T[] | undefined> {
         if (field && value) {
             this.apiUrl += `?%${field}=${value}`;
         }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services';
+import { AutenticacaoService } from '@medicar/core/services';
 
 @Component({
   selector: 'rts-logout',
@@ -8,7 +8,7 @@ import { AuthService } from '../_services';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AutenticacaoService) { }
 
   ngOnInit(): void {
     this.authService.logout();
