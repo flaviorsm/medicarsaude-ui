@@ -3,8 +3,6 @@ import { Observable } from 'rxjs';
 
 export interface IService<T> {
 
-    get httpHeaders(): HttpHeaders | undefined;
-
     create(model: T): Observable<T | undefined>;
 
     find(field?: string, value?: string): Observable<any[] | undefined>;

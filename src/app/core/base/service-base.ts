@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { IService } from '..';
-import { TokenStorageService } from '../services';
 
 export abstract class ServiceBase<T> implements IService<T>{
 
@@ -12,26 +11,15 @@ export abstract class ServiceBase<T> implements IService<T>{
 
     constructor(
         pathApi: string,
-        private http: HttpClient,
-        private tokenStorageService: TokenStorageService) {
+        private http: HttpClient) {
         this.isLoadingSubject = new BehaviorSubject<boolean>(false);
 
         this.apiUrl = `${environment.apiUrl}/${pathApi}`;
     }
 
-    get httpHeaders(): HttpHeaders | undefined {
-        const auth = this.tokenStorageService.getAuthLocalStorage();
-        if (auth && auth.token) {
-            return new HttpHeaders({
-                token: `${auth.token}`,
-            });
-        }
-        return undefined;
-    }
-
     create(model: T): Observable<T | undefined> {
         this.isLoadingSubject.next(true);
-        return this.http.post<any>(this.apiUrl, model, { headers: this.httpHeaders })
+        return this.http.post<any>(this.apiUrl, model)
             .pipe(
                 map(res => res.data),
                 catchError((err) => {
@@ -52,7 +40,7 @@ export abstract class ServiceBase<T> implements IService<T>{
             this.apiUrl += `?%${field}=${value}`;
         }
         this.isLoadingSubject.next(true);
-        return this.http.get<any>(this.apiUrl, { headers: this.httpHeaders })
+        return this.http.get<any>(this.apiUrl)
             .pipe(
                 map(res => res.data),
                 catchError((err) => {
@@ -65,7 +53,7 @@ export abstract class ServiceBase<T> implements IService<T>{
 
     update(id: string, model: T): Observable<T | undefined> {
         this.isLoadingSubject.next(true);
-        return this.http.put<any>(`${this.apiUrl}/${id}`, model, { headers: this.httpHeaders })
+        return this.http.put<any>(`${this.apiUrl}/${id}`, model)
             .pipe(
                 map(res => res.data),
                 catchError((err) => {
@@ -78,7 +66,7 @@ export abstract class ServiceBase<T> implements IService<T>{
 
     delete(id: string): Observable<any> {
         this.isLoadingSubject.next(true);
-        return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.httpHeaders })
+        return this.http.delete(`${this.apiUrl}/${id}`)
             .pipe(
                 map(res => res),
                 catchError((err) => {

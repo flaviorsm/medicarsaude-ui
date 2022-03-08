@@ -11,12 +11,11 @@ export class TokenStorageService {
   constructor() { }
 
   getAuthLocalStorage(): AuthModel | undefined {
-    try {
-      const authData = JSON.parse(localStorage.getItem(this.localStorageSession) || '');
-      return authData;
-    } catch (error) {
-      return undefined;
+    const authStorage = localStorage.getItem(this.localStorageSession);
+    if (authStorage) {
+      return JSON.parse(authStorage);
     }
+    return undefined;
   }
 
   setAuthLocalStorage(auth: AuthModel): void {

@@ -1,3 +1,4 @@
+import { AutenticacaoService } from '@medicar/core/services';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  get nomeUsuario(): string {
+    return this.autenticacaoService.currentUserValue.nome;
+  }
+
+  constructor(private autenticacaoService: AutenticacaoService) {
+    console.log(this.autenticacaoService.currentUserValue);
+  }
 
   ngOnInit(): void {
   }
