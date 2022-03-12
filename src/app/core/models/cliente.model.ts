@@ -1,17 +1,27 @@
+import { Gerador } from './../shared/gerador';
+import { StatusEnum } from '..';
+
 export class ClienteModel {
-    _id?: string;
+    id?: string;
+    codigo: string;
     nome!: string;
-    endereco!: string;
     email!: string;
     telefone!: string;
     cpf!: string;
     rg!: string;
     dataNascimento!: Date;
-    codigo!: string;
-    status!: string;
+    status!: StatusEnum;
     cep!: string;
     rua!: string;
     bairro!: string;
     cidade!: string;
     estado!: string;
+
+    endereco?: any;
+    pessoaFisica?: any;
+    pessoa?: any;
+
+    constructor() {
+        this.codigo = Gerador.codigoAleatorio();
+    }
 }

@@ -1,9 +1,9 @@
 export class VendaModel {
     _id: string;
     codigo: string;
-    cliente: string;
-    plano: string;
-    vendedor: string;
+    cliente: any;
+    plano: any;
+    vendedor: any;
     dataVenda: Date;
 
     constructor() {

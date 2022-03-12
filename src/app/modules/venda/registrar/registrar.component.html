@@ -10,21 +10,20 @@
                 </div>
                 <hr />
 
-                <div class="card-body pt-2 pb-0 mt-5">
+                <div class="card-body pt-2 pb-0 mt-5" novalidate="novalidate" [formGroup]="form">
                     <form>
                         <div class="row">
                             <h2>Escolher plano</h2>
                             <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Planos</label>
                             <div class="col-sm-6 col-auto">
                                 <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-                                <select class="form-select form-control">
-                                    <option value="1" selected>Plano 1</option>
-                                    <option value="2">Plano 2</option>
-                                    <option value="3">Plano 3</option>
+                                <select class="form-select form-control" name="plano" formControlName="plano"
+                                    [ngModel]="planos" (ngModelChange)="changePlano($event)">
+                                    <option *ngFor="let plano of planos" [ngValue]="plano">{{ plano.nome }}</option>
                                 </select>
                             </div>
                             <div class="col-sm-4 text-end">
-                                <p class="fw-bold">R$ 50,00</p>
+                                <p class="fw-bold">{{valorPlano}}</p>
                             </div>
                         </div>
 
@@ -34,30 +33,33 @@
                             <div class="row mb-3">
                                 <label for="cpf" class="col-sm-1 col-form-label">CPF:</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="cpf">
+                                    <input type="text" class="form-control" id="cpf" name="cpf" formControlName="cpf">
                                 </div>
-                                <label for="status" class="col-sm-1 col-form-label">Status:</label>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="dataNascimento" class="col-sm-1 col-form-label">Data Nascimento:</label>
                                 <div class="col-sm-5">
-                                    <select class="form-select form-control" id="status">
-                                        <option value="A" selected>ATIVO</option>
-                                        <option value="B">INATIVO</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="dataNascimento" name="dataNascimento"
+                                        formControlName="dataNascimento">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="nome" class="col-sm-1 col-form-label">Nome:</label>
                                 <div class="col-sm-11">
-                                    <input type="text" class="form-control" id="nome">
+                                    <input type="text" class="form-control" id="nome" name="nome"
+                                        formControlName="nome">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="email" class="col-sm-1 col-form-label">E-mail:</label>
                                 <div class="col-sm-5">
-                                    <input type="email" class="form-control" id="email">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        formControlName="email">
                                 </div>
                                 <label for="telefone" class="col-sm-1 col-form-label">Telefone:</label>
                                 <div class="col-sm-5">
-                                    <input type="tel" class="form-control" id="telefone">
+                                    <input type="tel" class="form-control" id="telefone" name="telefone"
+                                        formControlName="telefone">
                                 </div>
                             </div>
                         </div>
@@ -68,27 +70,30 @@
                             <div class="row mb-3">
                                 <label for="cep" class="col-sm-1 col-form-label">CEP:</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="cep">
+                                    <input type="text" class="form-control" id="cep" name="cep" formControlName="cep">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="rua" class="col-sm-1 col-form-label">Rua:</label>
                                 <div class="col-sm-11">
-                                    <input type="text" class="form-control" id="rua">
+                                    <input type="text" class="form-control" id="rua" name="rua" formControlName="rua">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="bairro" class="col-sm-1 col-form-label">Bairro:</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="bairro">
+                                    <input type="text" class="form-control" id="bairro" name="bairro"
+                                        formControlName="bairro">
                                 </div>
                                 <label for="cidade" class="col-sm-1 col-form-label">Cidade:</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="cidade">
+                                    <input type="text" class="form-control" id="cidade" name="cidade"
+                                        formControlName="cidade">
                                 </div>
                                 <label for="estado" class="col-sm-1 col-form-label">Estado:</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="estado">
+                                    <input type="text" class="form-control" id="estado" name="estado"
+                                        formControlName="estado">
                                 </div>
                             </div>
                         </div>
@@ -98,7 +103,7 @@
                 <div class="card-footer pt-2 pb-0 mt-5">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="button" class="btn btn-danger" [routerLink]="['/venda']">CANCELAR</button>
-                        <button type="button" class="btn btn-primary">SALVAR</button>
+                        <button type="button" class="btn btn-primary" (click)="salvarVenda()">SALVAR</button>
                     </div>
                 </div>
             </div>

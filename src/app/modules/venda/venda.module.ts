@@ -5,6 +5,7 @@ import { VendaRoutingModule } from './venda-routing.module';
 import { VendaComponent } from './venda.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { ListaComponent } from './listar/lista.component';
+import { CoreModule } from '@medicar/core/core.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ListaComponent } from './listar/lista.component';
     RegistrarComponent
   ],
   imports: [
+    CoreModule,
     CommonModule,
     VendaRoutingModule
   ]
