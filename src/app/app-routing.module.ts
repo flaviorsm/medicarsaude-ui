@@ -20,6 +20,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/venda/venda.module').then((m) => m.VendaModule),
   },
+  {
+    path: 'plano',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/plano/plano.module').then((m) => m.PlanoModule),
+  },
   { path: '**', redirectTo: 'error/404' },
 ];
 

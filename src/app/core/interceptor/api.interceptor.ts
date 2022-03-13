@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
 
-  constructor(private autenticacaoService: AutenticacaoService, private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(this.addAuthToken(request)).pipe(

@@ -72,6 +72,14 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": ""
@@ -84,6 +92,9 @@
           "configurations": {
             "production": {
               "browserTarget": "medicarsaude-ui:build:production"
+            },
+            "staging": {
+              "browserTarget": "medicarsaude-ui:build:staging"
             }
           }
         },

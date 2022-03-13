@@ -18,9 +18,9 @@ export class ListaComponent implements OnInit {
   }
 
   getVenda(): void {
-    this.vendaService.find().subscribe(vendas => {
-      if (vendas) {
-        this.vendas = vendas;
+    this.vendaService.find().subscribe(result => {
+      if (result) {
+        this.vendas = result.data;
       }
     });
   }

@@ -1,4 +1,4 @@
-import { AutenticacaoService } from '@medicar/core/services';
+import { AutenticacaoService, TokenStorageService } from '@medicar/core/services';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,14 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
 
-    constructor(private authService: AutenticacaoService) { }
+    constructor(private authService: AutenticacaoService, private tokenStorageService: TokenStorageService) { }
 
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
-        const currentUser = this.authService.currentUserValue;
-        if (currentUser) {
+        const auth = this.tokenStorageService.getAuthLocalStorage();
+
+        if (auth && auth.token) {
             return true;
         }
 

@@ -1,10 +1,13 @@
 import { Observable } from 'rxjs';
+import { Result } from './result';
 
 export interface IService<T> {
 
-    create(model: T): Observable<T | undefined>;
+    find(field?: string, value?: string): Observable<Result | undefined>;
 
-    find(field?: string, value?: string): Observable<any[] | undefined>;
+    findById(id: string): Observable<T | undefined>;
+
+    create(model: T): Observable<T | undefined>;
 
     update(id: string, model: T): Observable<T | undefined>;
 

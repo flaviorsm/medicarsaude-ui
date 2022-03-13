@@ -38,7 +38,7 @@ export class RegistrarComponent implements OnInit {
   }
 
   initForm(): void {
-    this.planoService.find().subscribe(planos => this.planos = planos || []);
+    this.planoService.find().subscribe(result => this.planos = result ? result.data : []);
     this.form = this.fb.group({
       plano: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -65,7 +65,7 @@ export class RegistrarComponent implements OnInit {
   }
 
   changePlano(plano: PlanoModel): void {
-    this.idPlano = plano._id || '';
+    this.idPlano = plano.id || '';
   }
 
   preencherVenda(idCliente: string): any {
