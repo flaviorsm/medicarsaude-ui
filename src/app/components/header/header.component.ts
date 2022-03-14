@@ -1,5 +1,5 @@
-import { AutenticacaoService } from '@medicar/core/services';
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from '@medicar/core/services';
 
 @Component({
   selector: 'rts-header',
@@ -9,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   get nomeUsuario(): string {
-    return this.autenticacaoService.currentUserValue.nome;
+    const auth = this.tokenStorageService.getAuthLocalStorage();
+    return auth ? auth.username : '';
   }
 
-  constructor(private autenticacaoService: AutenticacaoService) {
-    console.log(this.autenticacaoService.currentUserValue);
+  constructor(private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {

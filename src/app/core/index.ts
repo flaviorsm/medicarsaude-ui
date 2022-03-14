@@ -12,9 +12,11 @@ export * from './models/venda.model';
 // Enums
 export * from './enums/role.enum';
 export * from './enums/status.enum';
+export * from './enums/funcao.enum';
 
 // interfaces
 export * from './interfaces/iservice';
 
 // base
 export * from './base/service-base';
+

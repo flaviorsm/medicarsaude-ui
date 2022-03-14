@@ -26,6 +26,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/plano/plano.module').then((m) => m.PlanoModule),
   },
+  {
+    path: 'colaborador',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/colaborador/colaborador.module').then((m) => m.ColaboradorModule),
+  },
   { path: '**', redirectTo: 'error/404' },
 ];
 

@@ -44,7 +44,7 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       nome: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      dataNascimento: ['', [Validators.required, this.isValidDate]],
+      dataNascimento: ['', [Validators.required]],
       telefone: ['', [Validators.required, Validators.pattern(/^(\d{0,2})(\d{0,5})(\d{0,4})/g)]],
       cpf: ['', [Validators.required]],
       senha: ['', [Validators.required]],
@@ -60,11 +60,10 @@ export class RegistrationComponent implements OnInit {
         cpf: this.f.cpf.value,
         email: this.f.email.value,
         telefone: this.f.telefone.value,
-        dataNascimento: new Date(this.f.dataNascimento.value),
+        dataNascimento: this.f.dataNascimento.value,
         usuario: this.f.nome.value.split(' ', 1)[0].toLowerCase(),
         senha: this.f.senha.value,
       });
-
       const registrationSubscr = this.autenticacaoService
         .cadastro(newUser)
         .pipe(first())

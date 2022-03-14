@@ -44,10 +44,6 @@ export abstract class ServiceBase<T> implements IService<T>{
         return this.http.get<Result>(url)
             .pipe(
                 map(result => result),
-                catchError((err) => {
-                    console.error('Erro ao fazer busca', err);
-                    return of(undefined);
-                }),
                 finalize(() => this.isLoadingSubject.next(false))
             );
     }

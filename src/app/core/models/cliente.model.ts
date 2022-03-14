@@ -1,4 +1,4 @@
-import { Gerador } from './../shared/gerador';
+import { Util } from '../shared/util';
 import { StatusEnum } from '..';
 
 export class ClienteModel {
@@ -22,6 +22,6 @@ export class ClienteModel {
     pessoa?: any;
 
     constructor() {
-        this.codigo = Gerador.codigoAleatorio();
+        this.codigo = Util.codigoAleatorio();
     }
 }

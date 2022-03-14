@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SplashScreenComponent } from '@medicar/components';
 import { MaskDirective } from './directives';
 import { FilterPipe } from './shared/filter.pipe';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
   declarations: [
@@ -17,6 +20,7 @@ import { FilterPipe } from './shared/filter.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxMaskModule.forRoot(),
   ],
   exports: [
     FormsModule,
@@ -24,6 +28,7 @@ import { FilterPipe } from './shared/filter.pipe';
     MaskDirective,
     SplashScreenComponent,
     FilterPipe,
+    NgxMaskModule,
   ]
 })
 export class CoreModule { }

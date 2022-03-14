@@ -38,8 +38,8 @@
         </div>
         <div class="col-6">
             <label for="dataNascimento" class="font-weight-bolder text-dark">Data de Nascimento</label>
-            <input #dataNascimento id="dataNascimento" rtsMask="00/00/0000"
-                class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6" type="text"
+            <input #dataNascimento id="dataNascimento"
+                class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6" type="date"
                 name="dataNascimento" formControlName="dataNascimento" autocomplete="off" required
                 [ngClass]="{ 'is-invalid': f.dataNascimento.invalid && f.dataNascimento.touched }" tabindex="3" />
             <div *ngIf="f.dataNascimento.invalid && f.dataNascimento.touched" class="alert">

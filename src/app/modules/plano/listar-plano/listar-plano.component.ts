@@ -23,10 +23,6 @@ export class ListarPlanoComponent implements OnInit {
     this.planoService.find().subscribe(result => this.planos = result ? result.data : []);
   }
 
-  pesquisar(event: any): void {
-    console.log(event.text);
-  }
-
   deletar(id?: string): void {
     if (id) {
       this.planoService.delete(id)

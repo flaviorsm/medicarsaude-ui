@@ -1,7 +1,8 @@
 import { StatusEnum } from '..';
-
+import { Util } from '@medicar/core/shared/util';
 export class ColaboradorModel {
-    codigo!: string;
+    id?: string;
+    codigo: string;
     status!: StatusEnum;
     funcao!: string;
     dataContratacao!: Date;
@@ -18,4 +19,8 @@ export class ColaboradorModel {
     bairro!: string;
     cidade!: string;
     estado!: string;
+
+    constructor(codigo?: string) {
+        this.codigo = codigo ?? Util.codigoAleatorio();
+    }
 }
