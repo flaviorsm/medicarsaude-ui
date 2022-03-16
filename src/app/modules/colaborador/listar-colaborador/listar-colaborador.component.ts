@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColaboradorModel, StatusEnum } from '@medicar/core';
+import { ColaboradorModel, ListComponent, StatusEnum } from '@medicar/core';
 import { ColaboradorService } from '@medicar/core/services';
 
 @Component({
@@ -7,27 +7,9 @@ import { ColaboradorService } from '@medicar/core/services';
   templateUrl: './listar-colaborador.component.html',
   styleUrls: ['./listar-colaborador.component.scss']
 })
-export class ListarColaboradorComponent implements OnInit {
+export class ListarColaboradorComponent extends ListComponent<ColaboradorModel, ColaboradorService> {
 
-  colaboradores: ColaboradorModel[] = [];
-  statusEnum = StatusEnum;
-  search = '';
-
-  constructor(private serviceColaborador: ColaboradorService) { }
-
-  ngOnInit(): void {
-    this.init();
+  constructor(serviceColaborador: ColaboradorService) {
+    super(serviceColaborador);
   }
-
-  init(): void {
-    this.serviceColaborador.find().subscribe(result => this.colaboradores = result ? result.data : []);
-  }
-
-  deletar(id?: string): void {
-    if (id) {
-      this.serviceColaborador.delete(id)
-        .subscribe(_ => window.location.reload);
-    }
-  }
-
 }

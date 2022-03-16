@@ -19,32 +19,7 @@
                     </ng-container>
                     <form class="form flex-center" novalidate="novalidate" [formGroup]="form">
                         <div class="row mb-3">
-                            <div class="col-sm-1 text-end">
-                                <label for="funcao" class="col-form-label">Função:</label>
-                            </div>
-                            <div class="col-sm-5">
-                                <select class="form-select form-control" name="funcao" formControlName="funcao"
-                                    [ngModel]="funcaoEnum"
-                                    [ngClass]="{ 'was-validated': formControl.funcao.invalid && formControl.funcao.touched }" required
-                                    tabindex="1">
-                                    <option *ngFor="let value of funcaoEnumKeys" [ngValue]="value">{{
-                                        funcaoEnum[value] }}</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-2 text-end">
-                                <label for="dataContratacao" class="col-form-label">Data Contratação:</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="date" class="col-auto form-control" id="dataContratacao"
-                                    name="dataContratacao" formControlName="dataContratacao"
-                                    [ngClass]="{ 'is-invalid': formControl.dataContratacao.invalid && formControl.dataContratacao.touched }" required
-                                    tabindex="2">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <hr />
-                            <h2>Dados Colaborador</h2>
+                            <h2>Dados Cliente</h2>
 
                             <div class="row mb-3">
                                 <div class="col-sm-1 text-end">
@@ -53,27 +28,8 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="cpf" name="cpf" formControlName="cpf"
                                         mask="000.000.000-99" [dropSpecialCharacters]="false"
-                                        [ngClass]="{ 'is-invalid': formControl.cpf.invalid && formControl.cpf.touched }" required
-                                        tabindex="3">
-                                </div>
-
-                                <div class="col-sm-2 text-end">
-                                    <label for="ctps" class="col-form-label">CTPS:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="ctps" name="ctps" formControlName="ctps"
-                                        [ngClass]="{ 'is-invalid': formControl.ctps.invalid && formControl.ctps.touched }" required
-                                        tabindex="4">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-1 text-end">
-                                    <label for="rg" class="col-form-label">RG:</label>
-                                </div>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="rg" name="rg" formControlName="rg"
-                                        [ngClass]="{ 'is-invalid': formControl.rg.invalid && formControl.rg.touched }" required
-                                        tabindex="5">
+                                        [ngClass]="{ 'is-invalid': formControl.cpf.invalid && formControl.cpf.touched }"
+                                        required tabindex="3">
                                 </div>
                                 <div class="col-sm-2 text-end">
                                     <label for="dataNascimento" class="col-form-label">Data Nascimento:</label>
@@ -92,8 +48,8 @@
                                 </div>
                                 <div class="col-sm-11">
                                     <input type="text" class="form-control" id="nome" name="nome" formControlName="nome"
-                                        [ngClass]="{ 'is-invalid': formControl.nome.invalid && formControl.nome.touched }" required
-                                        tabindex="7">
+                                        [ngClass]="{ 'is-invalid': formControl.nome.invalid && formControl.nome.touched }"
+                                        required tabindex="7">
                                 </div>
                             </div>
 
@@ -104,8 +60,8 @@
                                 <div class="col-sm-5">
                                     <input type="email" class="form-control" id="email" name="email"
                                         formControlName="email"
-                                        [ngClass]="{ 'is-invalid': formControl.email.invalid && formControl.email.touched }" required
-                                        tabindex="8">
+                                        [ngClass]="{ 'is-invalid': formControl.email.invalid && formControl.email.touched }"
+                                        required tabindex="8">
                                 </div>
                                 <div class="col-sm-2 text-end">
                                     <label for="telefone" class="col-form-label">Telefone:</label>
@@ -114,8 +70,8 @@
                                     <input type="tel" class="form-control" id="telefone" name="telefone"
                                         mask="(00) 00000-0000" [dropSpecialCharacters]="false"
                                         formControlName="telefone"
-                                        [ngClass]="{ 'is-invalid': formControl.telefone.invalid && formControl.telefone.touched }" required
-                                        tabindex="9">
+                                        [ngClass]="{ 'is-invalid': formControl.telefone.invalid && formControl.telefone.touched }"
+                                        required tabindex="9">
                                 </div>
                             </div>
 
@@ -131,15 +87,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="row mb-3">
-                                <div class="form-check">
-                                    <label class="form-check-label col-sm-2" for="usuario">Usuario do sistema</label>
-                                    <input class="form-check-input" type="checkbox" value="" id="usuario" name="usuario"
-                                        formControlName="usuario" tabindex="11">
-                                </div>
-                            </div>
-
                         </div>
 
                         <div class="row">
@@ -149,33 +96,40 @@
                                 <label for="cep" class="col-sm-1 col-form-label text-end">CEP:</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="cep" name="cep" formControlName="cep"
-                                        mask="00000-000" [dropSpecialCharacters]="false" 
-                                        [ngClass]="{ 'is-invalid': formControl.cep.invalid && formControl.cep.touched }" required tabindex="12">
+                                        mask="00000-000" [dropSpecialCharacters]="false"
+                                        [ngClass]="{ 'is-invalid': formControl.cep.invalid && formControl.cep.touched }"
+                                        required tabindex="12">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="rua" class="col-sm-1 col-form-label text-end">Rua:</label>
                                 <div class="col-sm-11">
                                     <input type="text" class="form-control" id="rua" name="rua" formControlName="rua"
-                                    [ngClass]="{ 'is-invalid': formControl.rua.invalid && formControl.rua.touched }" required tabindex="13">
+                                        [ngClass]="{ 'is-invalid': formControl.rua.invalid && formControl.rua.touched }"
+                                        required tabindex="13">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="bairro" class="col-sm-1 col-form-label text-end">Bairro:</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" id="bairro" name="bairro"
-                                        formControlName="bairro" 
-                                        [ngClass]="{ 'is-invalid': formControl.bairro.invalid && formControl.bairro.touched }" required tabindex="14">
+                                        formControlName="bairro"
+                                        [ngClass]="{ 'is-invalid': formControl.bairro.invalid && formControl.bairro.touched }"
+                                        required tabindex="14">
                                 </div>
                                 <label for="cidade" class="col-sm-1 col-form-label text-end">Cidade:</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" id="cidade" name="cidade"
-                                        formControlName="cidade" [ngClass]="{ 'is-invalid': formControl.cidade.invalid && formControl.cidade.touched }" required tabindex="15">
+                                        formControlName="cidade"
+                                        [ngClass]="{ 'is-invalid': formControl.cidade.invalid && formControl.cidade.touched }"
+                                        required tabindex="15">
                                 </div>
                                 <label for="estado" class="col-sm-1 col-form-label text-end">Estado:</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control text-uppercase" id="estado" name="estado"
-                                        mask="SS" formControlName="estado" [ngClass]="{ 'is-invalid': formControl.estado.invalid && formControl.estado.touched }" required tabindex="16">
+                                        mask="SS" formControlName="estado"
+                                        [ngClass]="{ 'is-invalid': formControl.estado.invalid && formControl.estado.touched }"
+                                        required tabindex="16">
                                 </div>
                             </div>
                         </div>
@@ -184,7 +138,7 @@
 
                 <div class="card-footer pt-2 pb-0 mt-5">
                     <div class="p-4 d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-danger" [routerLink]="['/colaborador']">CANCELAR</button>
+                        <button type="button" class="btn btn-danger" [routerLink]="['/cliente']">CANCELAR</button>
                         <button type="button" class="btn btn-primary" (click)="register(idEntity)">SALVAR</button>
                     </div>
                 </div>

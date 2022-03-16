@@ -4,13 +4,13 @@
             <div class="card card-custom card-stretch gutter-b">
                 <div class="row card-header border-0 pt-5">
                     <div class="col-10">
-                        <h1 class="card-title font-weight-bolder text-dark">Colaborador</h1>
-                        <h2 class="text-muted font-weight-bold font-size-lg">Lista de colaboradores</h2>
+                        <h1 class="card-title font-weight-bolder text-dark">Cliente</h1>
+                        <h2 class="text-muted font-weight-bold font-size-lg">Lista de Clientes</h2>
                     </div>
                     <div class="col-2">
                         <button type="button" class="btn btn-primary btn-lg float-end"
-                            [routerLink]="['/colaborador/registrar']">
-                            Novo Colaborador
+                            [routerLink]="['/cliente/registrar']">
+                            Novo Cliente
                         </button>
                     </div>
                 </div>
@@ -35,8 +35,6 @@
                                 <th scope="col">Nome</th>
                                 <th scope="col">Telefone</th>
                                 <th scope="col">E-mail</th>
-                                <th scope="col">Função</th>
-                                <th scope="col">Data Contratação</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Ação</th>
                             </tr>
@@ -47,12 +45,10 @@
                                 <td>{{ item.nome }}</td>
                                 <td>{{ item.telefone }}</td>
                                 <td>{{ item.email }}</td>
-                                <td>{{ item.funcao }}</td>
-                                <td>{{ item.dataContratacao | date: 'dd/MM/yyyy' }}</td>
                                 <td>{{ statusEnum[item.status] }}</td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-outline-primary mr-1"
-                                        [routerLink]="['/colaborador/registrar/'+ item.id]">
+                                        [routerLink]="['/cliente/registrar/'+ item.id]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                             fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                             <path

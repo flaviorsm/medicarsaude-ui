@@ -19,4 +19,5 @@ export * from './interfaces/iservice';
 
 // base
 export * from './base/service-base';
-
+export * from './base/list-component.base';
+export * from './base/register-component.base';
