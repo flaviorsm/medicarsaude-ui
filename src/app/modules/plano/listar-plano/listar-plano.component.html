@@ -39,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of planos | filter:'nome':search; let i = index">
+                            <tr *ngFor="let item of listModels | filter:'nome':search; let i = index">
                                 <th scope="row">{{ item.nome }}</th>
                                 <td>{{ item.descricao }}</td>
                                 <td>{{ item.valor | currency: 'BRL'}}</td>

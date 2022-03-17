@@ -18,10 +18,11 @@ export abstract class ListComponent<T, TService extends IService<T>> implements 
         this.service.find().subscribe(result => this.listModels = result ? result.data : []);
     }
 
-    deletar(id?: string): void {
-        if (id) {
-            this.service.delete(id)
-                .subscribe(_ => window.location.reload);
-        }
+    deletar(id: string): void {
+        this.service.delete(id).subscribe(result => {
+            if (result) {
+                this.listModels = this.listModels.filter((obj: any) => obj.id !== id);
+            }
+        });
     }
 }

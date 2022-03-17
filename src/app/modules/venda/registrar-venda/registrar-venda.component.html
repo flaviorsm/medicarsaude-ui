@@ -4,9 +4,11 @@
             <div class="card card-custom card-stretch gutter-b">
                 <div class="row card-header border-0 pt-5">
                     <div class="col-12">
-                        <h1 class="card-title font-weight-bolder text-dark">Cliente</h1>
-                        <h2 class="text-muted font-weight-bold font-size-lg">{{ isUpdate ? 'Atualizar informações do' :
-                            'Inserir novo' }} Cliente</h2>
+                        <h1 class="card-title font-weight-bolder text-dark">Venda</h1>
+                        <h2 class="text-muted font-weight-bold font-size-lg">
+                            {{ isUpdate ? 'Atualizar informações da' : 'Inserir nova' }} 
+                            venda {{ model?.codigo }} do dia {{ model?.dataVenda | date: 'dd/MM/yyyy'}}
+                        </h2>
                     </div>
                 </div>
                 <hr />
@@ -18,28 +20,52 @@
                         </div>
                     </ng-container>
                     <form class="form flex-center" novalidate="novalidate" [formGroup]="form">
-                        <div class="row mb-3">
-                            <h2>Dados Cliente</h2>
 
+                        <div class="row  mb-3">
+                            <h2>Dados da Venda</h2>
+                            <div class="col-sm-1 text-end">
+                                <label for="colFormLabelLg" class="col-form-label col-form-label-lg">Vendedor</label>
+                            </div>
+                            <div class="col-sm-5 col-auto">
+                                <label class="visually-hidden" for="autoSizingSelect">Preference</label>
+                                <select class="form-select form-control" name="vendedor" formControlName="vendedor"
+                                    [ngModel]="vendedores" (ngModelChange)="changeVendedor($event)">
+                                    <option *ngFor="let vendedor of vendedores" [ngValue]="vendedor.id">{{ vendedor.nome
+                                        }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-sm-1 text-end">
+                                <label for="colFormLabelLg" class="col-form-label col-form-label-lg">Planos</label>
+                            </div>
+                            <div class="col-sm-3 col-auto">
+                                <select class="form-select form-control" name="plano" formControlName="plano"
+                                    [ngModel]="planos" (ngModelChange)="changePlano($event)">
+                                    <option *ngFor="let plano of planos" [ngValue]="plano.id">{{ plano.nome }}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <p class="fs-3">{{ valorPlano | currency: 'BRL' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3" disabled="true">
+                            <h2>Dados Cliente</h2>
                             <div class="row mb-3">
                                 <div class="col-sm-1 text-end">
                                     <label for="cpf" class="col-form-label">CPF:</label>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-3">
                                     <input type="text" class="form-control" id="cpf" name="cpf" formControlName="cpf"
                                         mask="000.000.000-99" [dropSpecialCharacters]="false"
                                         [ngClass]="{ 'is-invalid': formControl.cpf.invalid && formControl.cpf.touched }"
-                                        required tabindex="3">
+                                        required tabindex="3" [readonly]="possuiCliente && isUpdate">
                                 </div>
-                                <div class="col-sm-2 text-end">
-                                    <label for="dataNascimento" class="col-form-label">Data Nascimento:</label>
+                                <div class="col-sm-2 text-start">
+                                    <button type="button" class="btn btn-primary" *ngIf="!isUpdate"
+                                        (click)="searchCliente()">PESQUISAR</button>
                                 </div>
-                                <div class="col-sm-4">
-                                    <input type="date" class="form-control" id="dataNascimento" name="dataNascimento"
-                                        formControlName="dataNascimento"
-                                        [ngClass]="{ 'is-invalid': formControl.dataNascimento.invalid && formControl.dataNascimento.touched }" required
-                                        tabindex="6">
-                                </div>
+
                             </div>
 
                             <div class="row mb-3">
@@ -49,7 +75,7 @@
                                 <div class="col-sm-11">
                                     <input type="text" class="form-control" id="nome" name="nome" formControlName="nome"
                                         [ngClass]="{ 'is-invalid': formControl.nome.invalid && formControl.nome.touched }"
-                                        required tabindex="7">
+                                        required [readonly]="possuiCliente" tabindex="7">
                                 </div>
                             </div>
 
@@ -57,39 +83,35 @@
                                 <div class="col-sm-1 text-end">
                                     <label for="email" class="col-form-label">E-mail:</label>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-3">
                                     <input type="email" class="form-control" id="email" name="email"
                                         formControlName="email"
                                         [ngClass]="{ 'is-invalid': formControl.email.invalid && formControl.email.touched }"
-                                        required tabindex="8">
+                                        required [readonly]="possuiCliente" tabindex="8">
                                 </div>
-                                <div class="col-sm-2 text-end">
+                                <div class="col-sm-1 text-end">
                                     <label for="telefone" class="col-form-label">Telefone:</label>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <input type="tel" class="form-control" id="telefone" name="telefone"
                                         mask="(00) 00000-0000" [dropSpecialCharacters]="false"
                                         formControlName="telefone"
                                         [ngClass]="{ 'is-invalid': formControl.telefone.invalid && formControl.telefone.touched }"
-                                        required tabindex="9">
+                                        required [readonly]="possuiCliente" tabindex="9">
                                 </div>
-                            </div>
-
-                            <div class="row mb-3" *ngIf="isUpdate">
-                                <div class="col-sm-1 text-end">
-                                    <label for="status" class="col-form-label">Status:</label>
+                                <div class="col-sm-2 text-end">
+                                    <label for="dataNascimento" class="col-form-label">Data Nascimento:</label>
                                 </div>
-                                <div class="col-sm-5">
-                                    <select class="form-select form-control" name="status" formControlName="status"
-                                        tabindex="10" [ngModel]="statusEnum" tabindex="10">
-                                        <option *ngFor="let value of statusEnumKeys" [ngValue]="value">{{
-                                            statusEnum[value] }}</option>
-                                    </select>
+                                <div class="col-sm-2">
+                                    <input type="date" class="form-control" id="dataNascimento" name="dataNascimento"
+                                        formControlName="dataNascimento"
+                                        [ngClass]="{ 'is-invalid': formControl.dataNascimento.invalid && formControl.dataNascimento.touched }"
+                                        required [readonly]="possuiCliente" tabindex="6">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" *ngIf="!isUpdate">
                             <hr />
                             <h2>Dados Endereço</h2>
                             <div class="row mb-3">
@@ -98,7 +120,7 @@
                                     <input type="text" class="form-control" id="cep" name="cep" formControlName="cep"
                                         mask="00000-000" [dropSpecialCharacters]="false"
                                         [ngClass]="{ 'is-invalid': formControl.cep.invalid && formControl.cep.touched }"
-                                        required tabindex="12">
+                                        required [readonly]="possuiCliente" tabindex="12">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -106,7 +128,7 @@
                                 <div class="col-sm-11">
                                     <input type="text" class="form-control" id="rua" name="rua" formControlName="rua"
                                         [ngClass]="{ 'is-invalid': formControl.rua.invalid && formControl.rua.touched }"
-                                        required tabindex="13">
+                                        required [readonly]="possuiCliente" tabindex="13">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -115,21 +137,21 @@
                                     <input type="text" class="form-control" id="bairro" name="bairro"
                                         formControlName="bairro"
                                         [ngClass]="{ 'is-invalid': formControl.bairro.invalid && formControl.bairro.touched }"
-                                        required tabindex="14">
+                                        required [readonly]="possuiCliente" tabindex="14">
                                 </div>
                                 <label for="cidade" class="col-sm-1 col-form-label text-end">Cidade:</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" id="cidade" name="cidade"
                                         formControlName="cidade"
                                         [ngClass]="{ 'is-invalid': formControl.cidade.invalid && formControl.cidade.touched }"
-                                        required tabindex="15">
+                                        required [readonly]="possuiCliente" tabindex="15">
                                 </div>
                                 <label for="estado" class="col-sm-1 col-form-label text-end">Estado:</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control text-uppercase" id="estado" name="estado"
                                         mask="SS" formControlName="estado"
                                         [ngClass]="{ 'is-invalid': formControl.estado.invalid && formControl.estado.touched }"
-                                        required tabindex="16">
+                                        required [readonly]="possuiCliente" tabindex="16">
                                 </div>
                             </div>
                         </div>
@@ -138,7 +160,7 @@
 
                 <div class="card-footer pt-2 pb-0 mt-5">
                     <div class="p-4 d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-danger" [routerLink]="['/cliente']">CANCELAR</button>
+                        <button type="button" class="btn btn-danger" [routerLink]="['/venda']">CANCELAR</button>
                         <button type="button" class="btn btn-primary" (click)="register(idEntity)">SALVAR</button>
                     </div>
                 </div>

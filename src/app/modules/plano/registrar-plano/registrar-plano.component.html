@@ -5,7 +5,9 @@
                 <div class="row card-header border-0 pt-5">
                     <div class="col-12">
                         <h1 class="card-title font-weight-bolder text-dark">Plano</h1>
-                        <h2 class="text-muted font-weight-bold font-size-lg">{{ title }}</h2>
+                        <h2 class="text-muted font-weight-bold font-size-lg">
+                            {{ isUpdate ? 'Atualizar informações do' : 'Inserir novo' }} plano
+                        </h2>
                     </div>
                 </div>
                 <hr />
@@ -42,12 +44,13 @@
                                         formControlName="descricao">
                                 </div>
                             </div>
-                            <div class="row mb-3" *ngIf="idPlano">
+                            <div class="row mb-3" *ngIf="isUpdate">
                                 <label for="status" class="col-sm-1 col-form-label">Status:</label>
                                 <div class="col-sm-5 col-auto">
                                     <select class="form-select form-control" name="status" formControlName="status"
                                         [ngModel]="statusEnum">
-                                        <option *ngFor="let value of statusEnumKeys" [ngValue]="value">{{ statusEnum[value] }}</option>
+                                        <option *ngFor="let value of statusEnumKeys" [ngValue]="value">{{
+                                            statusEnum[value] }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -58,7 +61,7 @@
                 <div class="card-footer pt-2 pb-0 mt-5">
                     <div class="p-4 d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="button" class="btn btn-danger" [routerLink]="['/plano']">CANCELAR</button>
-                        <button type="button" class="btn btn-primary" (click)="registrar(idPlano)">SALVAR</button>
+                        <button type="button" class="btn btn-primary" (click)="register(idEntity)">SALVAR</button>
                     </div>
                 </div>
             </div>

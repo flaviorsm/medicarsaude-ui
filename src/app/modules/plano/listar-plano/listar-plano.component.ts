@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PlanoModel, StatusEnum } from '@medicar/core';
+import { Component } from '@angular/core';
+import { ListComponent, PlanoModel } from '@medicar/core';
 import { PlanoService } from '@medicar/core/services';
 
 @Component({
@@ -7,27 +7,10 @@ import { PlanoService } from '@medicar/core/services';
   templateUrl: './listar-plano.component.html',
   styleUrls: ['./listar-plano.component.scss']
 })
-export class ListarPlanoComponent implements OnInit {
+export class ListarPlanoComponent extends ListComponent<PlanoModel, PlanoService> {
 
-  planos: PlanoModel[] = [];
-  statusEnum = StatusEnum;
-  search = '';
-
-  constructor(private planoService: PlanoService) { }
-
-  ngOnInit(): void {
-    this.init();
-  }
-
-  init(): void {
-    this.planoService.find().subscribe(result => this.planos = result ? result.data : []);
-  }
-
-  deletar(id?: string): void {
-    if (id) {
-      this.planoService.delete(id)
-        .subscribe(_ => window.location.reload);
-    }
+  constructor(service: PlanoService) {
+    super(service);
   }
 
 }

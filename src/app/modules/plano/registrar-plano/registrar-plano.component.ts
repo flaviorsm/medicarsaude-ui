@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PlanoModel, StatusEnum } from '@medicar/core';
+import { PlanoModel, RegisterComponent, StatusEnum } from '@medicar/core';
 import { PlanoService } from '@medicar/core/services';
 
 @Component({
@@ -9,34 +9,15 @@ import { PlanoService } from '@medicar/core/services';
   templateUrl: './registrar-plano.component.html',
   styleUrls: ['./registrar-plano.component.scss']
 })
-export class RegistrarPlanoComponent implements OnInit {
-
-  form!: FormGroup;
-  hasError = false;
-  message = '';
-  title = '';
-  statusEnum = StatusEnum;
-  statusEnumKeys: any[] = [];
+export class RegistrarPlanoComponent extends RegisterComponent<PlanoModel, PlanoService> {
 
   constructor(
     private fb: FormBuilder,
-    private planoService: PlanoService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    service: PlanoService,
+    router: Router,
+    activatedRoute: ActivatedRoute) {
 
-  ngOnInit(): void {
-    this.initForm();
-    this.title = this.idPlano ? 'Alterar plano' : 'Inserir novo plano';
-    this.obter(this.idPlano);
-    this.statusEnumKeys = Object.values(this.statusEnum).filter(value => typeof value === 'number');
-  }
-
-  get idPlano(): string | undefined {
-    return this.activatedRoute.snapshot.paramMap.get('id') || undefined;
-  }
-
-  get formControl(): any {
-    return this.form.controls;
+    super(service, router, activatedRoute, 'plano');
   }
 
   initForm(): void {
@@ -48,64 +29,20 @@ export class RegistrarPlanoComponent implements OnInit {
     });
   }
 
-  registrar(id?: string): void {
-    if (this.form.valid) {
-      if (id) {
-        this.atualizar(id);
-      } else {
-        this.salvar();
-      }
-    }
-  }
-
-  private salvar(): void {
-    this.planoService.create(this.preencherModel())
-      .subscribe(
-        _ => this.router.navigate(['/plano']),
-        err => {
-          this.hasError = true;
-          this.message = err.message;
-        }
-      );
-  }
-
-  private atualizar(id: string): void {
-    this.planoService.update(id, this.preencherModel()).subscribe(
-      _ => this.router.navigate(['/plano']),
-      err => {
-        this.hasError = true;
-        this.message = err.message;
-      }
-    );
-  }
-
-  private obter(id: string | undefined): void {
-    if (id) {
-      this.planoService.findById(id).subscribe(
-        model => {
-          this.preencherForm(model);
-        },
-        err => {
-          this.hasError = true;
-          this.message = err.message;
-        }
-      );
-    }
-  }
-
-  private preencherModel(): PlanoModel {
+  formToModel(): PlanoModel {
     return {
-      nome: this.formControl.nome.value,
-      valor: this.formControl.valor.value,
-      descricao: this.formControl.descricao.value,
-      status: this.formControl.status.value || StatusEnum.ATIVO
+      nome: super.formControl.nome.value,
+      valor: super.formControl.valor.value,
+      descricao: super.formControl.descricao.value,
+      status: super.formControl.status.value || StatusEnum.ATIVO
     };
   }
 
-  private preencherForm(model: PlanoModel | undefined): void {
-    this.formControl.nome.setValue(model?.nome);
-    this.formControl.valor.setValue(model?.valor);
-    this.formControl.descricao.setValue(model?.descricao);
-    this.formControl.status.setValue(model?.status);
+  modelToForm(model: PlanoModel | undefined): void {
+    super.formControl.nome.setValue(model?.nome);
+    super.formControl.valor.setValue(model?.valor);
+    super.formControl.descricao.setValue(model?.descricao);
+    super.formControl.status.setValue(model?.status);
   }
+
 }

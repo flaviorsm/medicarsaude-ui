@@ -1,18 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
+import { CoreModule } from '@medicar/core/core.module';
+import { ListarVendaComponent } from './listar-venda/listar-venda.component';
+import { RegistrarVendaComponent } from './registrar-venda/registrar-venda.component';
 import { VendaRoutingModule } from './venda-routing.module';
 import { VendaComponent } from './venda.component';
-import { RegistrarComponent } from './registrar/registrar.component';
-import { ListaComponent } from './listar/lista.component';
-import { CoreModule } from '@medicar/core/core.module';
-
 
 @NgModule({
   declarations: [
     VendaComponent,
-    ListaComponent,
-    RegistrarComponent
+    ListarVendaComponent,
+    RegistrarVendaComponent
   ],
   imports: [
     CoreModule,

@@ -1,17 +1,18 @@
+import { Util } from '../shared/util';
+
 export class VendaModel {
-    _id: string;
-    codigo: string;
+    id?: string;
+    codigo?: string;
     cliente: any;
     plano: any;
     vendedor: any;
     dataVenda: Date;
 
-    constructor() {
-        this._id = '';
-        this.codigo = '';
-        this.cliente = '';
-        this.plano = '';
-        this.vendedor = '';
-        this.dataVenda = {} as Date;
+    constructor(model: VendaModel) {
+        this.codigo = model.codigo ?? Util.codigoAleatorio();
+        this.cliente = model.cliente;
+        this.plano = model.plano;
+        this.vendedor = model.vendedor;
+        this.dataVenda = model.dataVenda;
     }
 }

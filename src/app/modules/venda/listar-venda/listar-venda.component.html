@@ -5,7 +5,7 @@
                 <div class="row card-header border-0 pt-5">
                     <div class="col-10">
                         <h1 class="card-title font-weight-bolder text-dark">Vendas</h1>
-                        <h2 class="text-muted font-weight-bold font-size-lg">Lista de vendas ativas</h2>
+                        <h2 class="text-muted font-weight-bold font-size-lg">Lista de vendas</h2>
                     </div>
                     <div class="col-2">
                         <button type="button" class="btn btn-primary btn-lg float-end"
@@ -21,12 +21,9 @@
                             Pesquisar:
                         </div>
                         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                            <input type="search" class="form-control form-control-dark"
-                                placeholder="Número do pedido..." aria-label="Search">
+                            <input type="search" class="form-control form-control-dark" placeholder="Código da venda..."
+                                aria-label="Search" [(ngModel)]="search" name="search">
                         </form>
-                        <div class="text-end">
-                            <button type="button" class="btn me-2 btn-primary">Pesquisar</button>
-                        </div>
                     </div>
                 </div>
 
@@ -43,15 +40,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let venda of vendas">
-                                <th scope="row">{{ venda.codigo }}</th>
-                                <td>{{ venda.plano }}</td>
-                                <td>{{ venda.cliente }}</td>
-                                <td>{{ venda.vendedor }}</td>
-                                <td>{{ venda.dataVenda }}</td>
+                            <tr *ngFor="let item of listModels | filter:'codigo':search; let i = index">
+                                <th scope="row">{{ item.codigo }}</th>
+                                <td>{{ item.plano.nome }}</td>
+                                <td>{{ item.cliente.nome }}</td>
+                                <td>{{ item.vendedor.nome }}</td>
+                                <td>{{ item.dataVenda | date: 'dd/MM/yyyy'}}</td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-outline-primary mr-1"
-                                        [routerLink]="['/venda/registrar/'+ venda._id]">
+                                        [routerLink]="['/venda/registrar/'+ item.id]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                             fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                             <path
@@ -59,7 +56,7 @@
                                         </svg>
                                     </button>
                                     <button type="button" class="btn btn-danger btn-outline-primary"
-                                        (click)="deletar(venda._id)">
+                                        (click)="deletar(item.id)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                             <path

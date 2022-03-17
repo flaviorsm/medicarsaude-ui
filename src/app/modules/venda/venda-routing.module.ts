@@ -1,7 +1,7 @@
-import { RegistrarComponent } from './registrar/registrar.component';
-import { ListaComponent } from './listar/lista.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ListarVendaComponent } from './listar-venda/listar-venda.component';
+import { RegistrarVendaComponent } from './registrar-venda/registrar-venda.component';
 import { VendaComponent } from './venda.component';
 
 const routes: Routes = [
@@ -11,15 +11,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListaComponent,
+        component: ListarVendaComponent,
       },
       {
         path: 'registrar',
-        component: RegistrarComponent,
+        component: RegistrarVendaComponent,
       },
       {
         path: 'registrar/:id',
-        component: RegistrarComponent,
+        component: RegistrarVendaComponent,
       },
     ]
   },
