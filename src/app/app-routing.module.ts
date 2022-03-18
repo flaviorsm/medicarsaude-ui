@@ -27,6 +27,12 @@ const routes: Routes = [
       import('./modules/cliente/cliente.module').then((m) => m.ClienteModule),
   },
   {
+    path: 'parceiro',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/parceiro/parceiro.module').then((m) => m.ParceiroModule),
+  },
+  {
     path: 'plano',
     canActivate: [AuthGuard],
     loadChildren: () =>

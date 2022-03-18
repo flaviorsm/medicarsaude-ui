@@ -13,6 +13,7 @@ export * from './models/venda.model';
 export * from './enums/role.enum';
 export * from './enums/status.enum';
 export * from './enums/funcao.enum';
+export * from './enums/categoria.enum';
 
 // interfaces
 export * from './interfaces/iservice';
