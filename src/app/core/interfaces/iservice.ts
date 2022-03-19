@@ -13,4 +13,5 @@ export interface IService<T> {
 
     delete(id: string): Observable<any>;
 
+    disable(id: string): Observable<any>;
 }

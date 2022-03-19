@@ -25,4 +25,17 @@ export abstract class ListComponent<T, TService extends IService<T>> implements 
             }
         });
     }
+
+    disable(id: string): void {
+        this.service.disable(id).subscribe(result => {
+            if (result) {
+                this.listModels = this.listModels.map((obj: any) => {
+                    if (obj.id === id) {
+                        obj.status = StatusEnum.INATIVO;
+                    }
+                    return obj;
+                });
+            }
+        });
+    }
 }

@@ -1,3 +1,4 @@
+import { StatusEnum } from '@medicar/core';
 import { Result } from './../interfaces/result';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
@@ -57,6 +58,15 @@ export abstract class ServiceBase<T> implements IService<T>{
                     console.error('Erro create', err);
                     return of(undefined);
                 }),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+
+    disable(id: string): Observable<any> {
+        this.isLoadingSubject.next(true);
+        return this.http.patch(`${this.apiUrl}/${id}/${StatusEnum.INATIVO}`, { status: StatusEnum.INATIVO })
+            .pipe(
+                map(res => res),
                 finalize(() => this.isLoadingSubject.next(false))
             );
     }

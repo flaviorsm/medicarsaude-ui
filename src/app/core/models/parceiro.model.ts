@@ -1,8 +1,7 @@
 import { StatusEnum } from '..';
-import { CategoriaEnum } from './../enums/categoria.enum';
 export class ParceiroModel {
     id?: string;
-    categoria: CategoriaEnum;
+    categoria: any;
     status: StatusEnum;
     planos: string[];
 

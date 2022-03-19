@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CategoriaEnum, ParceiroModel, PlanoModel, RegisterComponent, StatusEnum } from '@medicar/core';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ParceiroModel, PlanoModel, RegisterComponent } from '@medicar/core';
 import { ParceiroService, PlanoService } from '@medicar/core/services';
+import { Util } from '@medicar/core/shared/util';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
@@ -12,9 +13,9 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class RegistrarParceiroComponent extends RegisterComponent<ParceiroModel, ParceiroService> {
 
-  categoriaEnum = CategoriaEnum;
-  categoriaEnumKeys: any[] = [];
-  selectedCategoria = 0;
+  categoriaData = [{ id: 1, nome: 'Clínica' }, { id: 2, nome: 'Médico(a)' }];
+  categoriaSelected: any = {};
+  settingsCategoria = {} as IDropdownSettings;
 
   planos: PlanoModel[] = [];
   selectedPlanos: string[] = [];
@@ -29,29 +30,33 @@ export class RegistrarParceiroComponent extends RegisterComponent<ParceiroModel,
     activatedRoute: ActivatedRoute) {
 
     super(service, router, activatedRoute, 'parceiro');
-    this.categoriaEnumKeys = Object.values(this.categoriaEnum).filter(value => typeof value === 'number');
+
   }
 
   get ehClinica(): boolean {
-    return this.categoriaEnum[this.selectedCategoria] === this.categoriaEnum[CategoriaEnum.CLINICA];
+    return this.categoriaSelected.id === 1;
+  }
+
+  get hasCategoriaSelected(): boolean {
+    return this.categoriaSelected.id !== undefined;
   }
 
   initForm(): void {
     this.planoService.find().subscribe(result => this.planos = result ? result.data : []);
     this.form = this.fb.group({
       categoria: ['', Validators.required],
-      planos: [''],
+      planos: ['', Validators.required],
       status: [''],
 
-      cpf: ['', Validators.required],
-      rg: ['', Validators.required],
-      dataNascimento: ['', Validators.required],
-      crm: ['', Validators.required],
+      cpf: [''],
+      rg: [''],
+      dataNascimento: [''],
+      crm: [''],
 
-      cnpj: ['', Validators.required],
-      nomeFantasia: ['', Validators.required],
-      ie: ['', Validators.required],
-      dataFundacao: ['', Validators.required],
+      cnpj: [''],
+      nomeFantasia: [''],
+      ie: [''],
+      dataFundacao: [''],
 
       nome: ['', Validators.required],
       email: ['', Validators.required],
@@ -63,7 +68,6 @@ export class RegistrarParceiroComponent extends RegisterComponent<ParceiroModel,
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
     });
-
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -71,15 +75,25 @@ export class RegistrarParceiroComponent extends RegisterComponent<ParceiroModel,
       selectAllText: 'Marcar todos',
       unSelectAllText: 'Desmarcar todos',
       itemsShowLimit: 3,
-      allowSearchFilter: false
+      allowSearchFilter: false,
+      closeDropDownOnSelection: true,
+    };
+
+    this.settingsCategoria = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'nome',
+      itemsShowLimit: 1,
+      allowSearchFilter: false,
+      closeDropDownOnSelection: true,
     };
   }
 
   formToModel(): ParceiroModel {
     return new ParceiroModel({
-      categoria: super.formControl.categoria.value,
-      status: super.formControl.status.value,
-      planos: super.formControl.planos.value,
+      categoria: super.formControl.categoria.value[0],
+      status: super.formControl.status.value || undefined,
+      planos: this.getIdPlanos(super.formControl.planos.value),
 
       nome: super.formControl.nome.value,
       email: super.formControl.email.value,
@@ -91,7 +105,7 @@ export class RegistrarParceiroComponent extends RegisterComponent<ParceiroModel,
       CRM: super.formControl.crm.value,
 
       cnpj: super.formControl.cnpj.value,
-      IE: super.formControl.IE.value,
+      IE: super.formControl.ie.value,
       nomeFantasia: super.formControl.nomeFantasia.value,
       dataFundacao: super.formControl.dataFundacao.value,
 
@@ -104,48 +118,76 @@ export class RegistrarParceiroComponent extends RegisterComponent<ParceiroModel,
   }
 
   modelToForm(model: ParceiroModel | undefined): void {
-    super.formControl.categoria.setValue(model?.categoria);
-    super.formControl.status.setValue(model?.status);
-    super.formControl.planos.setValue(model?.planos);
-    super.formControl.nome.setValue(model?.nome);
-    super.formControl.email.setValue(model?.email);
-    super.formControl.telefone.setValue(model?.telefone);
+    if (model) {
+      this.categoriaSelected = model.categoria;
+      super.formControl.categoria.setValue([this.categoriaSelected]);
 
-    if (model?.categoria === CategoriaEnum.MEDICO) {
-      super.formControl.cpf.setValue(model?.cpf);
-      super.formControl.rg.setValue(model?.rg);
-      super.formControl.dataNascimento.setValue(model?.dataNascimento);
-      super.formControl.crm.setValue(model?.CRM);
+      super.formControl.status.setValue(model.status);
+      super.formControl.planos.setValue(model.planos);
+      super.formControl.nome.setValue(model.nome);
+      super.formControl.email.setValue(model.email);
+      super.formControl.telefone.setValue(model.telefone);
+
+      if (model.categoria.id === 1) {
+        super.formControl.cnpj.setValue(model.cnpj);
+        super.formControl.nomeFantasia.setValue(model.nomeFantasia);
+        super.formControl.ie.setValue(model.IE);
+        super.formControl.dataFundacao.setValue(Util.formataData(model.dataFundacao ?? new Date()));
+      }
+
+      if (model.categoria.id === 2) {
+        super.formControl.cpf.setValue(model.cpf);
+        super.formControl.rg.setValue(model.rg);
+        super.formControl.dataNascimento.setValue(Util.formataData(model.dataNascimento ?? new Date()));
+        super.formControl.crm.setValue(model.CRM);
+      }
+
+      super.formControl.cep.setValue(model.cep);
+      super.formControl.rua.setValue(model.rua);
+      super.formControl.bairro.setValue(model.bairro);
+      super.formControl.cidade.setValue(model.cidade);
+      super.formControl.estado.setValue(model.estado);
     }
-
-    if (model?.categoria === CategoriaEnum.CLINICA) {
-      super.formControl.cnpj.setValue(model?.cnpj);
-      super.formControl.nomeFantasia.setValue(model?.nomeFantasia);
-      super.formControl.ie.setValue(model?.IE);
-      super.formControl.dataFundacao.setValue(model?.dataFundacao);
-    }
-
-    super.formControl.cep.setValue(model?.cep);
-    super.formControl.rua.setValue(model?.rua);
-    super.formControl.bairro.setValue(model?.bairro);
-    super.formControl.cidade.setValue(model?.cidade);
-    super.formControl.estado.setValue(model?.estado);
   }
 
-  changeCategoria(value: number): void {
-    this.selectedCategoria = value;
-    if (value === CategoriaEnum.MEDICO) {
+  onItemSelect(item: any): void {
+    this.categoriaSelected = item;
+    if (this.ehClinica) {
       super.formControl.cnpj.setValue('');
       super.formControl.nomeFantasia.setValue('');
       super.formControl.ie.setValue('');
       super.formControl.dataFundacao.setValue('');
-    }
-
-    if (value === CategoriaEnum.CLINICA) {
+    } else {
       super.formControl.cpf.setValue('');
       super.formControl.rg.setValue('');
       super.formControl.dataNascimento.setValue('');
       super.formControl.crm.setValue('');
     }
   }
+
+  onDeSelect(): void {
+    this.categoriaSelected = {};
+
+    super.formControl.cnpj.setValue('');
+    super.formControl.nomeFantasia.setValue('');
+    super.formControl.ie.setValue('');
+    super.formControl.dataFundacao.setValue('');
+
+    super.formControl.cpf.setValue('');
+    super.formControl.rg.setValue('');
+    super.formControl.dataNascimento.setValue('');
+    super.formControl.crm.setValue('');
+
+  }
+
+  private getIdPlanos(planos: PlanoModel[]): string[] {
+    const ids: string[] = [];
+    for (const plano of planos) {
+      if (plano.id) {
+        ids.push(plano.id);
+      }
+    }
+    return ids;
+  }
+
 }
