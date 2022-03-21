@@ -21,9 +21,9 @@ export abstract class ServiceBase<T> implements IService<T>{
 
     create(model: T): Observable<T | undefined> {
         this.isLoadingSubject.next(true);
-        return this.http.post<Result>(this.apiUrl, model)
+        return this.http.post<T>(this.apiUrl, model)
             .pipe(
-                map(result => result.data),
+                map(result => result),
                 catchError((err) => {
                     console.error('Erro create', err);
                     return of(undefined);
@@ -62,15 +62,6 @@ export abstract class ServiceBase<T> implements IService<T>{
             );
     }
 
-    disable(id: string): Observable<any> {
-        this.isLoadingSubject.next(true);
-        return this.http.patch(`${this.apiUrl}/${id}/${StatusEnum.INATIVO}`, { status: StatusEnum.INATIVO })
-            .pipe(
-                map(res => res),
-                finalize(() => this.isLoadingSubject.next(false))
-            );
-    }
-
     delete(id: string): Observable<any> {
         this.isLoadingSubject.next(true);
         return this.http.delete(`${this.apiUrl}/${id}`)
@@ -80,6 +71,24 @@ export abstract class ServiceBase<T> implements IService<T>{
                     console.error('Erro deletar: ', err);
                     return of(undefined);
                 }),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+
+    disable(id: string): Observable<any> {
+        this.isLoadingSubject.next(true);
+        return this.http.patch(`${this.apiUrl}/${id}/${StatusEnum.INATIVO}`, { status: StatusEnum.INATIVO })
+            .pipe(
+                map(res => res),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+
+    path(id: string, body: any): Observable<any> {
+        this.isLoadingSubject.next(true);
+        return this.http.patch(`${this.apiUrl}/${id}`, body)
+            .pipe(
+                map(res => res),
                 finalize(() => this.isLoadingSubject.next(false))
             );
     }

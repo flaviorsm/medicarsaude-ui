@@ -22,8 +22,8 @@ export abstract class RegisterComponent<T, TService extends IService<T>> impleme
     patchModel: string;
 
     constructor(
-        private service: TService,
-        private router: Router,
+        protected service: TService,
+        protected router: Router,
         private activatedRoute: ActivatedRoute,
         patchModel: string) {
         this.patchModel = patchModel;

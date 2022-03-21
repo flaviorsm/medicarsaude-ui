@@ -1,3 +1,5 @@
+import { ContratoModel } from './contrato.model';
+import { StatusPagamentoEnum } from '../enums/status-pagamento.enum';
 import { Util } from '../shared/util';
 
 export class VendaModel {
@@ -7,6 +9,8 @@ export class VendaModel {
     plano: any;
     vendedor: any;
     dataVenda: Date;
+    statusPagamento: StatusPagamentoEnum;
+    contrato?: ContratoModel;
 
     constructor(model: VendaModel) {
         this.codigo = model.codigo ?? Util.codigoAleatorio();
@@ -14,5 +18,6 @@ export class VendaModel {
         this.plano = model.plano;
         this.vendedor = model.vendedor;
         this.dataVenda = model.dataVenda;
+        this.statusPagamento = model.statusPagamento;
     }
 }

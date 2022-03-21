@@ -1,7 +1,7 @@
-import { VendaModel } from './../../../core/models/venda.model';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ListComponent, StatusPagamentoEnum } from '@medicar/core';
 import { VendaService } from '@medicar/core/services';
-import { ListComponent } from '@medicar/core';
+import { VendaModel } from './../../../core/models/venda.model';
 
 @Component({
   selector: 'rts-listar-venda',
@@ -9,6 +9,8 @@ import { ListComponent } from '@medicar/core';
   styleUrls: ['./listar-venda.component.scss']
 })
 export class ListarVendaComponent extends ListComponent<VendaModel, VendaService> {
+
+  statusPagamento = StatusPagamentoEnum;
 
   constructor(service: VendaService) {
     super(service);
