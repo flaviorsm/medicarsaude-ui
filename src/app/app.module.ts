@@ -1,5 +1,5 @@
 import { ApiInterceptor } from './core/interceptor/api.interceptor';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,6 +36,7 @@ registerLocaleData(ptBr);
     },
     { provide: LOCALE_ID, useValue: 'pt' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
+    CurrencyPipe,
   ],
   bootstrap: [AppComponent]
 })

@@ -6,6 +6,7 @@ import { SplashScreenComponent } from '@medicar/components';
 import { MaskDirective } from './directives';
 import { FilterPipe } from './shared/filter.pipe';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -21,6 +22,7 @@ export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
     ReactiveFormsModule,
     HttpClientModule,
     NgxMaskModule.forRoot(),
+    NgbModule,
   ],
   exports: [
     FormsModule,
@@ -29,6 +31,7 @@ export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
     SplashScreenComponent,
     FilterPipe,
     NgxMaskModule,
+    NgbModule
   ]
 })
 export class CoreModule { }

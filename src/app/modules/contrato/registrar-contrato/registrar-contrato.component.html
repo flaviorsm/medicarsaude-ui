@@ -1,0 +1,53 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-custom card-stretch gutter-b">
+                <div class="row card-header border-0 pt-5">
+                    <div class="col-12">
+                        <h1 class="card-title font-weight-bolder text-dark">Contrato</h1>
+                        <h2 class="text-muted font-weight-bold font-size-lg">Código: {{ contratoModel?.codigo }}</h2>
+                    </div>
+                </div>
+                <hr />
+                <div class="card-body pt-2 pb-0 mt-5">
+                    <nav ngbNav #nav="ngbNav" class="nav-tabs">
+                        <ng-container ngbNavItem>
+                            <a ngbNavLink>
+                                <h4>Plano</h4>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <rts-plano [plano]="contratoModel?.venda.plano"></rts-plano>
+                            </ng-template>
+                        </ng-container>
+                        <ng-container ngbNavItem>
+                            <a ngbNavLink>
+                                <h4>Cliente</h4>
+                            </a>
+                            <ng-template ngbNavContent>
+
+                            </ng-template>
+                        </ng-container>
+                        <ng-container ngbNavItem>
+                            <a ngbNavLink>
+                                <h4>Vendedor</h4>
+                            </a>
+                            <ng-template ngbNavContent>
+
+                            </ng-template>
+                        </ng-container>
+                        <ng-container ngbNavItem>
+                            <a ngbNavLink>
+                                <h4>Financeiro</h4>
+                            </a>
+                            <ng-template ngbNavContent>
+
+                            </ng-template>
+                        </ng-container>
+                    </nav>
+
+                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

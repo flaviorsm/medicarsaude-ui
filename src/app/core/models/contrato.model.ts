@@ -4,7 +4,7 @@ export class ContratoModel {
     id?: string;
     codigo!: string;
     status!: StatusEnum;
-    plano?: PlanoModel | string;
-    venda?: VendaModel | string;
+    plano?: any;
+    venda?: any;
     pagamentos?: PagamentoModel[];
 }
