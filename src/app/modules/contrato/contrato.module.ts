@@ -6,7 +6,11 @@ import { ContratoRoutingModule } from './contrato-routing.module';
 import { ContratoComponent } from './contrato.component';
 import { ListarContratoComponent } from './listar-contrato/listar-contrato.component';
 import { RegistrarContratoComponent } from './registrar-contrato/registrar-contrato.component';
-import { PlanoComponent } from './componets/plano/plano.component';
+import { PlanoComponent } from './components/plano/plano.component';
+import { ClienteComponent } from './components/cliente/cliente.component';
+import { VendedorComponent } from './components/vendedor/vendedor.component';
+import { EnderecoComponent } from './components/endereco/endereco.component';
+import { PagamentoComponent } from './components/pagamento/pagamento.component';
 
 
 @NgModule({
@@ -14,7 +18,11 @@ import { PlanoComponent } from './componets/plano/plano.component';
     ContratoComponent,
     ListarContratoComponent,
     RegistrarContratoComponent,
-    PlanoComponent
+    PlanoComponent,
+    ClienteComponent,
+    VendedorComponent,
+    EnderecoComponent,
+    PagamentoComponent
   ],
   imports: [
     CoreModule,

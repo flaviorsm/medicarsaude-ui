@@ -1,0 +1,33 @@
+<div class="card-body pt-2 pb-0 mt-5">
+    <div class="text-center mb-6" *ngIf="pagamentos.length === 0">
+        <h3>Nenhum pagamento realizado ou em aberto</h3>
+    </div>
+    <table class="table table-striped table-image" *ngIf="pagamentos.length > 0">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Referência</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Data Vencimento</th>
+                <th scope="col">Data Pagamento</th>
+                <th scope="col">Status</th>
+                <th scope="col">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of pagamentos">
+                <th scope="row">{{ item.codigo }}</th>
+                <td>{{ item.referencia | date: 'MM/yyyy' }}</td>
+                <td>{{ item.valorPago | currency: 'BRL' }}</td>
+                <td>{{ item.dataVencimento | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ item.dataPagamento | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ statusPagamentoEnum[item.status] }}</td>
+                <td>
+                    <button type="button" class="btn btn-success btn-outline-primary mr-1">
+                        BOLETO
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

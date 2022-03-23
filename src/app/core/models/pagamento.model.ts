@@ -4,6 +4,6 @@ export class PagamentoModel {
     valorPago!: number;
     dataVencimento!: Date;
     dataPagamento!: Date;
-    status!: string;
+    status!: number;
     contrato!: string;
 }

@@ -9,6 +9,7 @@ export class VendaModel {
     plano: any;
     vendedor: any;
     dataVenda: Date;
+    diaVencimento: number;
     statusPagamento: StatusPagamentoEnum;
     contrato?: ContratoModel;
 
@@ -19,5 +20,6 @@ export class VendaModel {
         this.vendedor = model.vendedor;
         this.dataVenda = model.dataVenda;
         this.statusPagamento = model.statusPagamento;
+        this.diaVencimento = model.diaVencimento;
     }
 }

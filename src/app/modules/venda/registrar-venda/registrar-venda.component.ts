@@ -65,6 +65,7 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
       nome: ['', Validators.required],
       email: ['', Validators.required],
       telefone: ['', Validators.required],
+      diaVencimento: ['', Validators.required],
       statusPagamento: [''],
       cep: [''],
       rua: [''],
@@ -89,6 +90,7 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
     return  new VendaModel({
       codigo: this.model?.codigo || undefined,
       statusPagamento: super.formControl.statusPagamento.value !== '' ? super.formControl.statusPagamento.value : undefined,
+      diaVencimento: super.formControl.diaVencimento.value,
       cliente: this.cliente.id,
       plano: this.idPlano,
       vendedor: this.idVendedor,
@@ -103,6 +105,7 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
       super.formControl.vendedor.setValue(model.vendedor.id);
       super.formControl.plano.setValue(model.plano.id);
       super.formControl.statusPagamento.setValue(model.statusPagamento);
+      super.formControl.diaVencimento.setValue(model.diaVencimento);
       this.valorPlano = model.plano.valor;
     }
   }
@@ -113,9 +116,9 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
     this.valorPlano = plano ? plano.valor : 0;
   }
 
-  changeVendedor(idSeletedVendedor: string): void {
-    if (idSeletedVendedor) {
-      this.idVendedor = idSeletedVendedor;
+  changeVendedor(idSelectedVendedor: string): void {
+    if (idSelectedVendedor) {
+      this.idVendedor = idSelectedVendedor;
     }
   }
 

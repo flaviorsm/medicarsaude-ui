@@ -24,7 +24,7 @@
                                 <h4>Cliente</h4>
                             </a>
                             <ng-template ngbNavContent>
-
+                                <rts-cliente [cliente]="contratoModel?.venda.cliente"></rts-cliente>
                             </ng-template>
                         </ng-container>
                         <ng-container ngbNavItem>
@@ -32,7 +32,7 @@
                                 <h4>Vendedor</h4>
                             </a>
                             <ng-template ngbNavContent>
-
+                                <rts-vendedor [vendedor]="contratoModel?.venda.vendedor"></rts-vendedor>
                             </ng-template>
                         </ng-container>
                         <ng-container ngbNavItem>
@@ -40,7 +40,7 @@
                                 <h4>Financeiro</h4>
                             </a>
                             <ng-template ngbNavContent>
-
+                                <rts-pagamento [pagamentos]="contratoModel?.pagamentos || []"></rts-pagamento>
                             </ng-template>
                         </ng-container>
                     </nav>

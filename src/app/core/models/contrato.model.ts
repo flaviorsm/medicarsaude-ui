@@ -1,4 +1,4 @@
-import { PagamentoModel, PlanoModel, StatusEnum, VendaModel } from '@medicar/core';
+import { PagamentoModel, StatusEnum } from '@medicar/core';
 
 export class ContratoModel {
     id?: string;
