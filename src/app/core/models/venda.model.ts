@@ -11,7 +11,7 @@ export class VendaModel {
     dataVenda: Date;
     diaVencimento: number;
     statusPagamento: StatusPagamentoEnum;
-    contrato?: ContratoModel;
+    contrato!: ContratoModel;
 
     constructor(model: VendaModel) {
         this.codigo = model.codigo ?? Util.codigoAleatorio();

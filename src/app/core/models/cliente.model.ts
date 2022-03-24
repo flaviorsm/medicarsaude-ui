@@ -15,6 +15,7 @@ export class ClienteModel {
     bairro!: string;
     cidade!: string;
     estado!: string;
+    endereco?: any;
 
     constructor(model: ClienteModel) {
         this.codigo = model.codigo ?? Util.codigoAleatorio();

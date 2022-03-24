@@ -2,9 +2,9 @@ import { ContratoModel } from './../../../core/models/contrato.model';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PlanoModel, RegisterComponent, StatusEnum, VendaModel } from '@medicar/core';
+import { PlanoModel, RegisterComponent, StatusEnum, VendaModel, PagamentoModel } from '@medicar/core';
 import { StatusPagamentoEnum } from '@medicar/core/enums/status-pagamento.enum';
-import { ClienteService, ColaboradorService, ContratoService, PlanoService, VendaService } from '@medicar/core/services';
+import { ClienteService, ColaboradorService, ContratoService, PagamentoService, PlanoService, VendaService } from '@medicar/core/services';
 import { Util } from '@medicar/core/shared/util';
 import { ClienteModel } from './../../../core/models/cliente.model';
 import { ColaboradorModel } from './../../../core/models/colaborador.model';
@@ -33,6 +33,7 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
     private colaboradorService: ColaboradorService,
     private clienteService: ClienteService,
     private contratoService: ContratoService,
+    private pagamentoService: PagamentoService,
     private fb: FormBuilder,
     service: VendaService,
     router: Router,
@@ -49,9 +50,7 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
     return this.model?.statusPagamento === StatusPagamentoEnum.EFETIVADO;
   }
 
-  get possuiContrato(): boolean {
-    return this.model?.contrato !== undefined;
-  }
+  possuiContrato = false;
 
   initForm(): void {
     this.statusPagamentoEnumKeys = Object.values(this.statusPagamentoEnum).filter(value => typeof value === 'number');
@@ -87,7 +86,7 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
   }
 
   formToModel(): VendaModel {
-    return  new VendaModel({
+    return new VendaModel({
       codigo: this.model?.codigo || undefined,
       statusPagamento: super.formControl.statusPagamento.value !== '' ? super.formControl.statusPagamento.value : undefined,
       diaVencimento: super.formControl.diaVencimento.value,
@@ -95,11 +94,13 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
       plano: this.idPlano,
       vendedor: this.idVendedor,
       dataVenda: new Date(),
+      contrato: {} as ContratoModel,
     });
   }
 
   modelToForm(model: VendaModel | undefined): void {
     if (model) {
+      this.possuiContrato = Object.keys(model.contrato).length > 0;
       this.cliente = model.cliente;
       this.clienteToForm(this.cliente);
       super.formControl.vendedor.setValue(model.vendedor.id);
@@ -149,12 +150,54 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
     contrato.plano = this.idPlano;
     contrato.venda = this.idEntity;
     this.contratoService.create(contrato).subscribe(cont => {
-      if (this.idEntity) {
-        this.service.path(this.idEntity, { contrato: cont?.id }).subscribe(_ => {
-          this.router.navigate(['/' + this.patchModel]);
+      if (this.idEntity && cont) {
+        this.service.path(this.idEntity, { contrato: cont.id }).subscribe(_ => {
+          this.gerarPagamentos(cont);
         });
       }
     });
+  }
+
+  private gerarPagamentos(cont: ContratoModel): void {
+
+    const today = new Date();
+    const pagamentos: PagamentoModel[] = [];
+    if (cont.id) {
+
+
+      pagamentos.push({
+        codigo: Util.codigoAleatorio(),
+        contrato: cont.id,
+        dataPagamento: today,
+        dataVencimento: today,
+        referencia: today,
+        status: StatusPagamentoEnum.EFETIVADO,
+        valorPago: this.valorPlano,
+      });
+      for (let index = 1; index <= 5; index++) {
+        const next30Days = 30 * index;
+        pagamentos.push({
+          codigo: Util.codigoAleatorio(),
+          contrato: cont.id,
+          dataPagamento: undefined,
+          dataVencimento: new Date(new Date(today.setDate(today.getDate() + next30Days))),
+          referencia: new Date(new Date(today.setDate(today.getDate() + next30Days))),
+          status: StatusPagamentoEnum.PENDENTE,
+          valorPago: this.valorPlano,
+        });
+      }
+
+      const qtd = pagamentos.length;
+      let i = 0;
+      pagamentos.forEach(pg => {
+        this.pagamentoService.create(pg).subscribe(() => {
+          i++;
+          if (qtd === i) {
+            this.router.navigate(['/' + this.patchModel]);
+          }
+        });
+      });
+    }
   }
 
   private clienteToForm(cliente: ClienteModel): void {

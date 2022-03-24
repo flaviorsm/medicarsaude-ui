@@ -3,7 +3,7 @@ export class PagamentoModel {
     referencia!: Date;
     valorPago!: number;
     dataVencimento!: Date;
-    dataPagamento!: Date;
+    dataPagamento?: Date;
     status!: number;
     contrato!: string;
 }
