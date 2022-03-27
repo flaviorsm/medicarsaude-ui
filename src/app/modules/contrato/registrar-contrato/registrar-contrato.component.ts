@@ -13,7 +13,6 @@ export class RegistrarContratoComponent implements OnInit {
 
   constructor(private router: Router) {
     this.contratoModel = this.router.getCurrentNavigation()?.extras.state as ContratoModel;
-    console.log(this.contratoModel);
     if (!this.contratoModel) {
       this.router.navigate(['contrato']);
     }

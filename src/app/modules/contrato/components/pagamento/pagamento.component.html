@@ -1,3 +1,18 @@
+<div class="row card-header border-0 pt-5">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div class="text-start font-weight-bolder text-dark">
+            Data de Vencimento:
+        </div>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input type="date" class="form-control form-control-dark" aria-label="Search"
+                [(ngModel)]="novaDataVenimento" name="novaDataVenimento">
+        </form>
+        <button type="button" class="btn btn-primary mr-2" (click)="gerarPagamento()">
+            Gera Pagamento
+        </button>
+    </div>
+</div>
+
 <div class="card-body pt-2 pb-0 mt-5">
     <div class="text-center mb-6" *ngIf="pagamentos.length === 0">
         <h3>Nenhum pagamento realizado ou em aberto</h3>
@@ -15,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of pagamentos">
+            <tr *ngFor="let item of pagamentos | sort: 'dataVencimento'">
                 <th scope="row">{{ item.codigo }}</th>
                 <td>{{ item.referencia | date: 'MM/yyyy' }}</td>
                 <td>{{ item.valorPago | currency: 'BRL' }}</td>
@@ -23,9 +38,24 @@
                 <td>{{ item.dataPagamento | date: 'dd/MM/yyyy' }}</td>
                 <td>{{ statusPagamentoEnum[item.status] }}</td>
                 <td>
-                    <button type="button" class="btn btn-success btn-outline-primary mr-1">
-                        BOLETO
-                    </button>
+                    <div *ngIf="item.status !== statusPagamentoEnum.EFETIVADO">
+                        <button *ngIf="item.status === statusPagamentoEnum.PENDENTE" type="button"
+                            class="btn btn-outline-primary mr-2" (click)="gerarBoleto()">
+                            <i class="bi bi-file-text-fill"></i>
+                        </button>
+                        <button *ngIf="item.status === statusPagamentoEnum.PENDENTE" type="button"
+                            class="btn btn-outline-success mr-2" (click)="efetivar(item.id)">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </button>
+                        <button *ngIf="item.status === statusPagamentoEnum.CANCELADO" type="button"
+                            class="btn btn-outline-info mr-2" (click)="reativar(item.id)">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                        </button>
+                        <button *ngIf="item.status === statusPagamentoEnum.PENDENTE" type="button"
+                            class="btn btn-outline-danger mr-2" (click)="cancelar(item.id)">
+                            <i class="bi bi-x-circle-fill"></i>
+                        </button>
+                    </div>
                 </td>
             </tr>
         </tbody>

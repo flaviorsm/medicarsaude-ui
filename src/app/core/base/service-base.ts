@@ -9,11 +9,11 @@ import { IService } from '..';
 export abstract class ServiceBase<T> implements IService<T>{
 
     isLoadingSubject!: BehaviorSubject<boolean>;
-    private apiUrl: string;
+    protected apiUrl: string;
 
     constructor(
         pathApi: string,
-        private http: HttpClient) {
+        protected http: HttpClient) {
         this.isLoadingSubject = new BehaviorSubject<boolean>(false);
 
         this.apiUrl = `${environment.apiUrl}/${pathApi}`;

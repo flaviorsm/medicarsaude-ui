@@ -7,6 +7,7 @@ import { MaskDirective } from './directives';
 import { FilterPipe } from './shared/filter.pipe';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SortPipe } from './shared/sort.pipe';
 
 export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -15,6 +16,7 @@ export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
     MaskDirective,
     SplashScreenComponent,
     FilterPipe,
+    SortPipe,
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
     SplashScreenComponent,
     FilterPipe,
     NgxMaskModule,
-    NgbModule
+    NgbModule,
+    SortPipe,
   ]
 })
 export class CoreModule { }

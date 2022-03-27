@@ -8,6 +8,7 @@ import { ClienteService, ColaboradorService, ContratoService, PagamentoService, 
 import { Util } from '@medicar/core/shared/util';
 import { ClienteModel } from './../../../core/models/cliente.model';
 import { ColaboradorModel } from './../../../core/models/colaborador.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'rts-registrar-venda',
@@ -149,10 +150,11 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
     contrato.status = StatusEnum.ATIVO;
     contrato.plano = this.idPlano;
     contrato.venda = this.idEntity;
-    this.contratoService.create(contrato).subscribe(cont => {
-      if (this.idEntity && cont) {
-        this.service.path(this.idEntity, { contrato: cont.id }).subscribe(_ => {
-          this.gerarPagamentos(cont);
+    contrato.pagamentos = [];
+    this.contratoService.create(contrato).subscribe(contratoDto => {
+      if (this.idEntity && contratoDto) {
+        this.service.path(this.idEntity, { contrato: contratoDto.id }).subscribe(_ => {
+          this.gerarPagamentos(contratoDto);
         });
       }
     });
@@ -160,42 +162,36 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
 
   private gerarPagamentos(cont: ContratoModel): void {
 
-    const today = new Date();
+    const today = moment().format('YYYY-MM-DD');
     const pagamentos: PagamentoModel[] = [];
+
     if (cont.id) {
-
-
       pagamentos.push({
         codigo: Util.codigoAleatorio(),
         contrato: cont.id,
-        dataPagamento: today,
-        dataVencimento: today,
-        referencia: today,
+        dataPagamento: new Date(today),
+        dataVencimento: new Date(today),
+        referencia: new Date(today),
         status: StatusPagamentoEnum.EFETIVADO,
         valorPago: this.valorPlano,
       });
+
       for (let index = 1; index <= 5; index++) {
-        const next30Days = 30 * index;
+        const nextMonth = moment(today).add(index, 'month').format('YYYY-MM-DD');
         pagamentos.push({
           codigo: Util.codigoAleatorio(),
           contrato: cont.id,
           dataPagamento: undefined,
-          dataVencimento: new Date(new Date(today.setDate(today.getDate() + next30Days))),
-          referencia: new Date(new Date(today.setDate(today.getDate() + next30Days))),
+          dataVencimento: new Date(nextMonth),
+          referencia: new Date(nextMonth),
           status: StatusPagamentoEnum.PENDENTE,
           valorPago: this.valorPlano,
         });
       }
-
-      const qtd = pagamentos.length;
-      let i = 0;
-      pagamentos.forEach(pg => {
-        this.pagamentoService.create(pg).subscribe(() => {
-          i++;
-          if (qtd === i) {
-            this.router.navigate(['/' + this.patchModel]);
-          }
-        });
+      this.pagamentoService.createList(pagamentos).subscribe(result => {
+        if (result && result.length > 0) {
+          this.router.navigate(['/' + this.patchModel]);
+        }
       });
     }
   }
