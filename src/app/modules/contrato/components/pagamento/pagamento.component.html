@@ -8,7 +8,7 @@
                 [(ngModel)]="novaDataVenimento" name="novaDataVenimento">
         </form>
         <button type="button" class="btn btn-primary mr-2" (click)="gerarPagamento()">
-            Gera Pagamento
+            Gerar Cobrança
         </button>
     </div>
 </div>
@@ -40,18 +40,18 @@
                 <td>
                     <div *ngIf="item.status !== statusPagamentoEnum.EFETIVADO">
                         <button *ngIf="item.status === statusPagamentoEnum.PENDENTE" type="button"
-                            class="btn btn-outline-primary mr-2" (click)="gerarBoleto()">
+                            class="btn btn-outline-primary mr-2" (click)="gerarBoleto(item)" title="Gerar boleto">
                             <i class="bi bi-file-text-fill"></i>
                         </button>
-                        <button *ngIf="item.status === statusPagamentoEnum.PENDENTE" type="button"
+                        <button *ngIf="item.status === statusPagamentoEnum.PENDENTE" type="button" title="Efetivar Pagamento"
                             class="btn btn-outline-success mr-2" (click)="efetivar(item.id)">
                             <i class="bi bi-check-circle-fill"></i>
                         </button>
-                        <button *ngIf="item.status === statusPagamentoEnum.CANCELADO" type="button"
+                        <button *ngIf="item.status === statusPagamentoEnum.CANCELADO" type="button" title="Reativar Cobrança"
                             class="btn btn-outline-info mr-2" (click)="reativar(item.id)">
                             <i class="bi bi-exclamation-circle-fill"></i>
                         </button>
-                        <button *ngIf="item.status === statusPagamentoEnum.PENDENTE" type="button"
+                        <button *ngIf="item.status === statusPagamentoEnum.PENDENTE" type="button" title="Cancelar Cobrança"
                             class="btn btn-outline-danger mr-2" (click)="cancelar(item.id)">
                             <i class="bi bi-x-circle-fill"></i>
                         </button>

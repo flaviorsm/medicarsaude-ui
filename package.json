@@ -30,6 +30,7 @@
     "bootstrap-sass": "^3.4.2",
     "chart.js": "^3.7.1",
     "jquery": "^3.6.0",
+    "jspdf": "^2.5.1",
     "moment": "^2.29.1",
     "ng-multiselect-dropdown": "^0.3.8",
     "ng2-charts": "^3.0.8",
