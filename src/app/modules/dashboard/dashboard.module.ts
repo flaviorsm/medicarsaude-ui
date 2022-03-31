@@ -1,17 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import { CoreModule } from '@medicar/core/core.module';
+import { NgChartsModule } from 'ng2-charts';
+import { ClienteBarChartComponent } from './clientes/cliente-bar-chart/cliente-bar-chart.component';
+import { ContratoPieChartComponent } from './contratos/contrato-pie-chart/contrato-pie-chart.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { CoreModule } from '@medicar/core/core.module';
-import { CommonModule } from '@angular/common';
-import { NgChartsModule } from 'ng2-charts';
-import { LineChartComponent } from './line-chart/line-chart.component';
-import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
-import { PieChartComponent } from './pie-chart/pie-chart.component';
-import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { PagamentoDoughnutChartComponent } from './pagamentos/pagamento-doughnut-chart/pagamento-doughnut-chart.component';
+import { VendaLineChartComponent } from './vendas/venda-line-chart/venda-line-chart.component';
+import { VendaPieChartComponent } from './vendas/venda-pie-chart/venda-pie-chart.component';
+
 
 @NgModule({
-  declarations: [DashboardComponent, LineChartComponent, DoughnutChartComponent, PieChartComponent, BarChartComponent],
+  declarations: [
+    DashboardComponent,
+    VendaLineChartComponent,
+    VendaPieChartComponent,
+    PagamentoDoughnutChartComponent,
+    ContratoPieChartComponent,
+    ClienteBarChartComponent,
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,

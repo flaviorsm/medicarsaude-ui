@@ -1,4 +1,17 @@
+import { StatusEnum } from './../enums/status.enum';
+import { StatusPagamentoEnum } from './../enums/status-pagamento.enum';
+
 export class Util {
+
+    static textoStatusPagamentoEnumConfig(index: number): any {
+        const status = StatusPagamentoEnum[index].toString().toLowerCase();
+        return status.charAt(0).toUpperCase() + status.slice(1);
+    }
+
+    static textoStatusEnumConfig(index: number): any {
+        const status = StatusEnum[index].toString().toLowerCase();
+        return status.charAt(0).toUpperCase() + status.slice(1);
+    }
 
     static codigoAleatorio(qtdLetas: number = 3): string {
 

@@ -2,40 +2,34 @@
     <div class="row space-top">
         <div class="col-md-4">
             <div class="card box">
-                <div class="card-title flex-sm-fill">
+                <div class="card-title">
+                    <h2>Vendas</h2>
+                    <span>Total de vendas</span>
+                </div>
+                <div class="card-body">
+                    <rts-venda-pie-chart></rts-venda-pie-chart>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card box">
+                <div class="card-title">
+                    <h2>Pagamentos</h2>
+                    <span>Relatório de pagamentos</span>
+                </div>
+                <div class="card-body">
+                    <rts-pagamento-doughnut-chart></rts-pagamento-doughnut-chart>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card box">
+                <div class="card-title">
                     <h2>Contratos</h2>
-                    <span>436 ativos</span>
+                    <span>Quantidade de contratos ativos</span>
                 </div>
                 <div class="card-body">
-                    <rts-line-chart [dataChart]="[65, 59, 80, 81, 40, 55, 56]"
-                        [labelsChart]="['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul']">
-                    </rts-line-chart>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card box">
-                <div class="card-title flex-sm-fill">
-                    <h2>Boletos</h2>
-                    <span>Pagos</span>
-                </div>
-                <div class="card-body">
-                    <rts-doughnut-chart [dataChart]="[45, 60]" [labelsChart]="['Mês atual', 'Mês anterio']">
-                    </rts-doughnut-chart>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card box">
-                <div class="card-title flex-sm-fill">
-                    <h2>Boletos</h2>
-                    <span>Gerados no mês</span>
-                </div>
-                <div class="card-body">
-                    <rts-pie-chart
-                    [dataChart]="[20, 12, 8]"
-                    [labelsChart]="['Pagos', 'A Receber', 'Vencidos']"
-                    ></rts-pie-chart>
+                    <rts-contrato-pie-chart></rts-contrato-pie-chart>
                 </div>
             </div>
         </div>
@@ -44,33 +38,23 @@
     <div class="row space-top">
         <div class="col-md-6">
             <div class="card box-2">
-                <div class="card-title flex-sm-fill">
+                <div class="card-title">
                     <h2>Vendas</h2>
-                    <span>Relatória de vendas</span>
+                    <span>Criados nos últimos 6 meses</span>
                 </div>
                 <div class="card-body">
-                    <rts-line-chart 
-                        [dataChart]="[65, 59, 80, 81, 40, 55, 56]"
-                        [labelsChart]="['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul']">
-                    </rts-line-chart>
+                    <rts-venda-line-chart></rts-venda-line-chart>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
              <div class="card box-2">
-                <div class="card-title flex-sm-fill">
-                    <h2>Clentes</h2>
-                    <span>Relatória de clentes</span>
+                <div class="card-title">
+                    <h2>Clientes</h2>
+                    <span>Criados nos últimos 6 meses</span>
                 </div>
                 <div class="card-body">
-                    <rts-bar-chart 
-                        [dataChart]="
-                        [
-                            { data: [10, 12, 15, 8, 5, 13], label: 'Novos' },
-                            { data: [8, 2, 10, 9, 7, 5], label: 'Perdidos' }
-                        ]"
-                        [labelsChart]="['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun']">
-                    </rts-bar-chart>
+                    <rts-cliente-bar-chart></rts-cliente-bar-chart>
                 </div>
             </div>
         </div>
