@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from '@medicar/core/services';
+import { AuthModel } from '@medicar/core';
+import { AutenticacaoService, TokenStorageService } from '@medicar/core/services';
 
 @Component({
   selector: 'rts-header',
@@ -8,15 +9,21 @@ import { TokenStorageService } from '@medicar/core/services';
 })
 export class HeaderComponent implements OnInit {
 
-  get nomeUsuario(): string {
-    const auth = this.tokenStorageService.getAuthLocalStorage();
-    return auth ? auth.username : '';
+  user: any;
+
+  get usuario(): AuthModel | undefined {
+    return this.tokenStorageService.getAuthLocalStorage() || undefined;
   }
 
-  constructor(private tokenStorageService: TokenStorageService) {
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    private authService: AutenticacaoService) {
   }
 
   ngOnInit(): void {
+    this.user = this.authService.currentUserValue;
+    console.log(this.user);
+
   }
 
 }

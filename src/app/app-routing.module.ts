@@ -50,6 +50,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/contrato/contrato.module').then((m) => m.ContratoModule),
   },
+  {
+    path: 'usuario',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/usuario/usuario.module').then((m) => m.UsuarioModule),
+  },
   { path: '**', redirectTo: 'error/404' },
 ];
 

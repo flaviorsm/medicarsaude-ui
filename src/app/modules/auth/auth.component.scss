@@ -11,6 +11,22 @@
   }
 }
 
+.container-logger {
+  width: 700px !important;
+}
+
+@media (max-width: 575.98px) {
+  .aside-img {
+    min-height: 300px !important;
+    background-size: 400px;
+  }
+
+  .login-content .login-form {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 @media (min-width: 992px) {
   .login-rigth {
     width: 100%;
@@ -31,25 +47,7 @@
 @media (min-width: 992px) and (max-width: 1399.98px) {
   .login-rigth {
     width: 100%;
-    max-width: 450px;
+    max-width: 600px;
   }
 }
 
-@media (max-width: 991.98px) {
-  .login-content .login-form {
-    width: 100%;
-    max-width: 400px;
-  }
-}
-
-@media (max-width: 575.98px) {
-  .aside-img {
-    min-height: 300px !important;
-    background-size: 400px;
-  }
-
-  .login-content .login-form {
-    width: 100%;
-    max-width: 100%;
-  }
-}

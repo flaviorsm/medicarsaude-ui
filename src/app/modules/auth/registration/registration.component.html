@@ -5,7 +5,7 @@
 </ng-container>
 <form class="form flex-center" novalidate="novalidate" [formGroup]="registrationForm" (ngSubmit)="registrar()">
     <div class="pb-13 pt-lg-0 pt-5 text-center">
-        <h3>CRIAR CONTA</h3>
+        <h3>{{idEntity ? 'ALTERAR' : 'CRIAR'}} CONTA</h3>
     </div>
     <div class="form-group row">
         <div class="col-12">

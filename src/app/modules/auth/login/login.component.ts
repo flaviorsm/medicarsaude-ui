@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutenticacaoService } from '@medicar/core/services';
+import { NavigationService } from '@medicar/core/services/navigation/navigation.service';
 import { Observable, Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 @Component({
@@ -13,7 +14,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm = {} as FormGroup;
   hasError = false;
-  returnUrl = '';
   isValidFormSubmitted = false;
   isLoading$: Observable<boolean>;
 
@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private authService: AutenticacaoService,
-    private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private navigation: NavigationService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     if (this.authService.currentUserValue) {
@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
   }
 
   get f(): any {
@@ -57,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .pipe(first())
         .subscribe((user) => {
           if (user) {
-            this.router.navigate([this.returnUrl]);
+            this.navigation.back();
           } else {
             this.hasError = true;
           }

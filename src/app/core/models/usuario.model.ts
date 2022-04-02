@@ -1,4 +1,4 @@
-import { RoleEnum, StatusEnum } from '@medicar/core';
+import { RoleEnum, StatusEnum, AuthModel } from '@medicar/core';
 
 export class UsuarioModel {
     id?: string;
@@ -7,7 +7,7 @@ export class UsuarioModel {
     telefone: string;
     cpf: string;
     senha: string;
-    dataNascimento?: Date;
+    dataNascimento: Date;
     usuario: string;
     status?: StatusEnum;
     regra?: RoleEnum;
