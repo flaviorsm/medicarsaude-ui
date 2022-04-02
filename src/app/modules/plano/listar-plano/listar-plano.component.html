@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="card-body pt-2 pb-0 mt-5">
+                <div class="card-body pt-2 pb-0 mt-5 table-responsive-sm">
                     <table class="table table-striped table-image">
                         <thead>
                             <tr>
@@ -44,12 +44,12 @@
                                 <td>{{ item.descricao }}</td>
                                 <td>{{ item.valor | currency: 'BRL'}}</td>
                                 <td>{{ statusEnum[item.status] }}</td>
-                                <td *ngIf="verificarRegra([roleEnum.ADMINISTRADOR])">
+                                <td *ngIf="verificarRegra([roleEnum.ADMINISTRADOR, roleEnum.COLABORADOR])">
                                     <button type="button" class="btn btn-success btn-outline-primary mr-1"
                                         [routerLink]="['/plano/registrar/'+ item.id]">
                                         <i class="bi bi-card-list"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-outline-primary"
+                                    <button *ngIf="verificarRegra([roleEnum.ADMINISTRADOR])" type="button" class="btn btn-danger btn-outline-primary"
                                         (click)="deletar(item.id)">
                                         <i class="bi bi-trash"></i>
                                     </button>
