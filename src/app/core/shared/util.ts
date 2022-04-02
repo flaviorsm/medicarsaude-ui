@@ -1,5 +1,8 @@
+import { AuthModel } from './../models/auth.model';
 import { StatusEnum } from './../enums/status.enum';
 import { StatusPagamentoEnum } from './../enums/status-pagamento.enum';
+import { RoleEnum } from '../enums/role.enum';
+import { environment } from '@environments/environment';
 
 export class Util {
 
@@ -38,5 +41,14 @@ export class Util {
         }
 
         return [year, month, day].join('-');
+    }
+
+    static hasPermission(rolesRoute: number[]): boolean {
+        const authStorage = localStorage.getItem(environment.sessionStorage);
+        if (authStorage) {
+            const roleUser: AuthModel = JSON.parse(authStorage);
+            return rolesRoute.includes(roleUser.role);
+        }
+        return false;
     }
 }

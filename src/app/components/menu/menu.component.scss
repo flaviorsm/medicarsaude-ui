@@ -1,7 +1,14 @@
 .bg-light {
     background-color: #ffffff !important;
-    padding: 0 8vw;
-    min-height: 12vh;
+    min-height: 10vh;
+}
+
+.navbar-nav.center {
+    margin: 0 auto;
+}
+
+.nav-item {
+    margin: 0 2.5em;
 }
 
 .item-menu {

@@ -1,7 +1,10 @@
+import { Util } from '@medicar/core/shared/util';
+import { AuthModel } from './../models/auth.model';
 import { Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FuncaoEnum, IService, StatusEnum } from '..';
+import { FuncaoEnum, IService, RoleEnum, StatusEnum } from '..';
+import { environment } from '@environments/environment';
 
 @Inject({})
 export abstract class RegisterComponent<T, TService extends IService<T>> implements OnInit {
@@ -12,6 +15,7 @@ export abstract class RegisterComponent<T, TService extends IService<T>> impleme
     funcaoEnumKeys: any[] = [];
     statusEnum = StatusEnum;
     statusEnumKeys: any[] = [];
+    roleEnum = RoleEnum;
 
     hasError = false;
     message = '';
@@ -35,6 +39,10 @@ export abstract class RegisterComponent<T, TService extends IService<T>> impleme
         this.statusEnumKeys = Object.values(this.statusEnum).filter(value => typeof value === 'number');
         this.initForm();
         this.getById(this.idEntity);
+    }
+
+    verificarRegra(regras: number[]): boolean {
+        return Util.hasPermission(regras);
     }
 
     get isUpdate(): boolean {

@@ -36,11 +36,11 @@
 
                             <div class="col-4">
                                 <label for="status" class="font-weight-bolder text-dark">Tipo:</label>
-                                <select class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
-                                    name="regra" formControlName="regra" tabindex="10" [ngModel]="regraEnum"
+                                <select [ngClass]="{disable: !verificarRegra([roleEnum.ADMINISTRADOR])}" class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    name="regra" formControlName="regra" tabindex="10" [ngModel]="roleEnum"
                                     tabindex="10">
                                     <option *ngFor="let value of regraEnumKeys" [ngValue]="value">{{
-                                        regraEnum[value] }}</option>
+                                        roleEnum[value] }}</option>
                                 </select>
                             </div>
                         </div>

@@ -1,14 +1,22 @@
 import { Inject, OnInit } from '@angular/core';
+import { Util } from '@medicar/core/shared/util';
 import { IService, StatusEnum } from '..';
+import { RoleEnum } from '../enums/role.enum';
 
 @Inject({})
 export abstract class ListComponent<T, TService extends IService<T>> implements OnInit {
 
     listModels: T[] = [];
     statusEnum = StatusEnum;
+    roleEnum = RoleEnum;
     search = '';
 
-    constructor(protected service: TService) { }
+    constructor(protected service: TService) {
+    }
+
+    verificarRegra(regras: number[]): boolean {
+        return Util.hasPermission(regras);
+    }
 
     ngOnInit(): void {
         this.init();

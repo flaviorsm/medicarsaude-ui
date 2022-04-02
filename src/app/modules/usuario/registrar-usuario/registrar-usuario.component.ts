@@ -14,7 +14,7 @@ import { UsuarioModel } from './../../../core/models/usuario.model';
 })
 export class RegistrarUsuarioComponent extends RegisterComponent<UsuarioModel, UsuarioService> {
 
-  regraEnum = RoleEnum;
+  roleEnum = RoleEnum;
   regraEnumKeys: any[] = [];
 
   constructor(
@@ -26,7 +26,7 @@ export class RegistrarUsuarioComponent extends RegisterComponent<UsuarioModel, U
 
     super(service, router, activatedRoute, 'usuario');
 
-    this.regraEnumKeys = Object.values(this.regraEnum).filter(value => typeof value === 'number');
+    this.regraEnumKeys = Object.values(this.roleEnum).filter(value => typeof value === 'number');
   }
 
   initForm(): void {

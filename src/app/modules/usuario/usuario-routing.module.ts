@@ -3,6 +3,7 @@ import { UsuarioComponent } from './usuario.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistrarUsuarioComponent } from './registrar-usuario/registrar-usuario.component';
+import { RoleEnum } from '@medicar/core';
 
 const routes: Routes = [
   {
@@ -12,14 +13,23 @@ const routes: Routes = [
       {
         path: '',
         component: ListarUsuarioComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR]
+        }
       },
       {
         path: 'registrar',
         component: RegistrarUsuarioComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR]
+        }
       },
       {
         path: 'registrar/:id',
         component: RegistrarUsuarioComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR, RoleEnum.CLIENTE]
+        }
       },
     ]
   },

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RoleEnum } from '@medicar/core';
 import { ListarPlanoComponent, RegistrarPlanoComponent } from '.';
 import { PlanoComponent } from './plano.component';
 
@@ -11,14 +12,23 @@ const routes: Routes = [
       {
         path: '',
         component: ListarPlanoComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR, RoleEnum.CLIENTE]
+        },
       },
       {
         path: 'registrar',
         component: RegistrarPlanoComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR]
+        },
       },
       {
         path: 'registrar/:id',
         component: RegistrarPlanoComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR]
+        },
       },
     ]
   },

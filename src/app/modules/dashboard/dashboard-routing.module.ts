@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RoleEnum } from '@medicar/core';
 import { DashboardComponent } from '.';
 
 const routes: Routes = [
@@ -11,6 +12,9 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    data: {
+      roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR]
+    }
   },
   {
     path: '**',

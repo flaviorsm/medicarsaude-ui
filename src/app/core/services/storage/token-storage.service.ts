@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@environments/environment';
 import { AuthModel } from '@medicar/core';
 
 @Injectable({
@@ -6,12 +7,10 @@ import { AuthModel } from '@medicar/core';
 })
 export class TokenStorageService {
 
-  private localStorageSession = 'sessionId';
-
   constructor() { }
 
   getAuthLocalStorage(): AuthModel | undefined {
-    const authStorage = localStorage.getItem(this.localStorageSession);
+    const authStorage = localStorage.getItem(environment.sessionStorage);
     if (authStorage) {
       return JSON.parse(authStorage);
     }
@@ -19,10 +18,10 @@ export class TokenStorageService {
   }
 
   setAuthLocalStorage(auth: AuthModel): void {
-    localStorage.setItem(this.localStorageSession, JSON.stringify(auth));
+    localStorage.setItem(environment.sessionStorage, JSON.stringify(auth));
   }
 
   removeAuth(): void {
-    localStorage.removeItem(this.localStorageSession);
+    localStorage.removeItem(environment.sessionStorage);
   }
 }

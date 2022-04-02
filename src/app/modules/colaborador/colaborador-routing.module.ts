@@ -3,6 +3,7 @@ import { ListarColaboradorComponent } from './listar-colaborador/listar-colabora
 import { ColaboradorComponent } from './colaborador.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RoleEnum } from '@medicar/core';
 
 const routes: Routes = [
   {
@@ -12,14 +13,23 @@ const routes: Routes = [
       {
         path: '',
         component: ListarColaboradorComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR]
+        }
       },
       {
         path: 'registrar',
         component: RegistrarColaboradorComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR]
+        }
       },
       {
         path: 'registrar/:id',
         component: RegistrarColaboradorComponent,
+        data: {
+          roles: [RoleEnum.ADMINISTRADOR, RoleEnum.COLABORADOR]
+        }
       },
     ]
   },

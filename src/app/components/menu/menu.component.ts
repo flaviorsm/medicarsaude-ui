@@ -2,6 +2,7 @@ import { UsuarioModel } from './../../core/models/usuario.model';
 import { TokenStorageService } from '@medicar/core/services';
 import { Component, OnInit } from '@angular/core';
 import { RoleEnum } from '@medicar/core';
+import { Util } from '@medicar/core/shared/util';
 
 @Component({
   selector: 'rts-menu',
@@ -11,13 +12,15 @@ import { RoleEnum } from '@medicar/core';
 export class MenuComponent implements OnInit {
 
   roleEnum = RoleEnum;
-  regra?: RoleEnum;
 
-  constructor(storageService: TokenStorageService) {
-    this.regra = storageService.getAuthLocalStorage()?.role;
+  constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  verificarRegra(regras: number[]): boolean {
+    return Util.hasPermission(regras);
   }
 
 }
