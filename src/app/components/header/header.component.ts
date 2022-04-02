@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthModel } from '@medicar/core';
+import { AuthModel, RoleEnum } from '@medicar/core';
 import { AutenticacaoService, TokenStorageService } from '@medicar/core/services';
 
 @Component({
@@ -10,6 +10,8 @@ import { AutenticacaoService, TokenStorageService } from '@medicar/core/services
 export class HeaderComponent implements OnInit {
 
   user: any;
+  roleEnum = RoleEnum;
+  regra?: RoleEnum;
 
   get usuario(): AuthModel | undefined {
     return this.tokenStorageService.getAuthLocalStorage() || undefined;
@@ -18,6 +20,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private tokenStorageService: TokenStorageService,
     private authService: AutenticacaoService) {
+      this.regra = this.tokenStorageService.getAuthLocalStorage()?.role;
   }
 
   ngOnInit(): void {

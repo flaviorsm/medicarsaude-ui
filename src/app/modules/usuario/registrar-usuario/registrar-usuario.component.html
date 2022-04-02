@@ -20,7 +20,7 @@
                     </ng-container>
                     <form class="form flex-center" novalidate="novalidate" [formGroup]="form">
                         <div class="form-group row">
-                            <div class="col-12">
+                            <div class="col-8">
                                 <label for="nome" class="font-weight-bolder text-dark">Nome</label>
                                 <input #nome id="nome"
                                     class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
@@ -32,6 +32,16 @@
                                         <span>Campo Obrigatório</span>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="col-4">
+                                <label for="status" class="font-weight-bolder text-dark">Tipo:</label>
+                                <select class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    name="regra" formControlName="regra" tabindex="10" [ngModel]="regraEnum"
+                                    tabindex="10">
+                                    <option *ngFor="let value of regraEnumKeys" [ngValue]="value">{{
+                                        regraEnum[value] }}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -103,7 +113,7 @@
 
                         </div>
 
-                        <div class="form-group row" *ngIf="!idEntity">
+                        <div class="form-group row">
                             <div class="col-6">
                                 <label for="senha" class="font-weight-bolder text-dark">Senha</label>
                                 <input id="senha"
@@ -120,13 +130,13 @@
                             </div>
                         </div>
 
-                        
+
                     </form>
                 </div>
 
                 <div class="card-footer pt-2 pb-0 mt-5">
                     <div class="p-4 d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-danger" [routerLink]="['/usuario']">CANCELAR</button>
+                        <button type="button" class="btn btn-danger" (click)="back()">CANCELAR</button>
                         <button type="button" class="btn btn-primary" (click)="register(idEntity)">SALVAR</button>
                     </div>
                 </div>

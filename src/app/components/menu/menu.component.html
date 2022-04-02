@@ -1,7 +1,7 @@
 <nav class="d-flex justify-content-center align-items-center py-3 item-menu bg-light">
     <div class="flex-sm-fill text-sm-center" [routerLink]="['/dashboard']" routerLinkActive="active">
         Dashboard<br />
-        <span>Relatorios Gráficos</span>
+        <span>Relatórios Gráficos</span>
     </div>
     <div class="flex-sm-fill text-sm-center" [routerLink]="['/venda']" routerLinkActive="active">
         Venda<br />
@@ -11,19 +11,19 @@
         Cliente<br />
         <span>Gerenciar clientes</span>
     </div>
-    <div class="flex-sm-fill text-sm-center" [routerLink]="['/parceiro']" routerLinkActive="active">
+    <div *ngIf="regra === roleEnum.GERENTE || regra === roleEnum.ADMINISTRADOR" class="flex-sm-fill text-sm-center" [routerLink]="['/parceiro']" routerLinkActive="active">
         Parceiro<br />
         <span>Gerenciar parceiros</span>
     </div>
-    <div class="flex-sm-fill text-sm-center" [routerLink]="['/plano']" routerLinkActive="active">
+    <div *ngIf="regra === roleEnum.GERENTE || regra === roleEnum.ADMINISTRADOR" class="flex-sm-fill text-sm-center" [routerLink]="['/plano']" routerLinkActive="active">
         Plano<br />
         <span>Gerenciar planos</span>
     </div>
-    <div class="flex-sm-fill text-sm-center" [routerLink]="['/colaborador']" routerLinkActive="active">
+    <div *ngIf="regra === roleEnum.ADMINISTRADOR" class="flex-sm-fill text-sm-center" [routerLink]="['/colaborador']" routerLinkActive="active">
         Colaborador<br />
         <span>Gerenciar colaborador</span>
     </div>
-    <div class="flex-sm-fill text-sm-center" [routerLink]="['/contrato']" routerLinkActive="active">
+    <div *ngIf="regra === roleEnum.GERENTE || regra === roleEnum.ADMINISTRADOR" class="flex-sm-fill text-sm-center" [routerLink]="['/contrato']" routerLinkActive="active">
         Contrato<br />
         <span>Gerenciar contrato</span>
     </div>

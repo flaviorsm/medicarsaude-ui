@@ -19,6 +19,11 @@ export class NavigationService {
     });
   }
 
+  backPage(): void {
+    this.history.pop();
+    this.back();
+  }
+
   back(): void {
     if (this.history.length > 0) {
       const last = this.history[this.history.length - 1];

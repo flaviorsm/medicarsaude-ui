@@ -1,4 +1,7 @@
+import { UsuarioModel } from './../../core/models/usuario.model';
+import { TokenStorageService } from '@medicar/core/services';
 import { Component, OnInit } from '@angular/core';
+import { RoleEnum } from '@medicar/core';
 
 @Component({
   selector: 'rts-menu',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  roleEnum = RoleEnum;
+  regra?: RoleEnum;
+
+  constructor(storageService: TokenStorageService) {
+    this.regra = storageService.getAuthLocalStorage()?.role;
+  }
 
   ngOnInit(): void {
   }
