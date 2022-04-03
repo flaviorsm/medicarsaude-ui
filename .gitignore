@@ -45,3 +45,7 @@ testem.log
 .DS_Store
 Thumbs.db
 .vscode/settings.json
+
+.env
+.env.test
+.env.production

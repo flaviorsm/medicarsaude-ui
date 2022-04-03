@@ -2,6 +2,7 @@
   "name": "medicarsaude-ui",
   "version": "0.0.0",
   "scripts": {
+    "config": "ts-node ./src/config-env.ts",
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
@@ -35,7 +36,9 @@
     "bootstrap-sass": "^3.4.2",
     "chart.js": "^3.7.1",
     "chartjs-plugin-datalabels": "^2.0.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "file-system": "^2.2.2",
     "jquery": "^3.6.0",
     "jspdf": "^2.5.1",
     "moment": "^2.29.1",
