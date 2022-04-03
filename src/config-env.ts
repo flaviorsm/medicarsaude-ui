@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const fs = require('file-system');
 
-const apiURL = process.env.API_ENDPOINT;
+const apiURL = process.env.API_ENDPOINT || 'https://medicarsaude-api.herokuapp.com/api';
 
 const targetPath = `./src/environments/environment.prod.ts`;
 const envConfigFile = `
