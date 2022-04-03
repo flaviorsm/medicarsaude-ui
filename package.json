@@ -45,6 +45,7 @@
     "ng-multiselect-dropdown": "^0.3.8",
     "ng2-charts": "^3.0.8",
     "ngx-mask": "^13.1.1",
+    "ngx-toastr": "^14.2.2",
     "path": "^0.12.7",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",

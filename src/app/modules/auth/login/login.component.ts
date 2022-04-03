@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AutenticacaoService } from '@medicar/core/services';
+import { AutenticacaoService, NotificationService } from '@medicar/core/services';
 import { NavigationService } from '@medicar/core/services/navigation/navigation.service';
 import { Observable, Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authService: AutenticacaoService,
     private router: Router,
-    private navigation: NavigationService
+    private navigation: NavigationService,
+    private notification: NotificationService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     if (this.authService.currentUserValue) {
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.navigation.back();
           } else {
             this.hasError = true;
+            this.notification.showError('Usuário ou senha inválidos', 'Login inválido');
           }
         });
       this.unsubscribe.push(loginSubscr);

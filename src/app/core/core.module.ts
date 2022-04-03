@@ -3,10 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SplashScreenComponent } from '@medicar/components';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { ToastrModule } from 'ngx-toastr';
 import { MaskDirective } from './directives';
 import { FilterPipe } from './shared/filter.pipe';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortPipe } from './shared/sort.pipe';
 
 export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
@@ -25,6 +26,7 @@ export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
     HttpClientModule,
     NgxMaskModule.forRoot(),
     NgbModule,
+    ToastrModule.forRoot(),
   ],
   exports: [
     FormsModule,
@@ -35,6 +37,7 @@ export const options = {} as Partial<IConfig> | (() => Partial<IConfig>);
     NgxMaskModule,
     NgbModule,
     SortPipe,
+    ToastrModule,
   ]
 })
 export class CoreModule { }

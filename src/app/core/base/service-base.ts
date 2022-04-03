@@ -5,6 +5,7 @@ import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { IService } from '..';
+import { NotificationService } from '../services';
 
 export abstract class ServiceBase<T> implements IService<T>{
 
@@ -13,7 +14,8 @@ export abstract class ServiceBase<T> implements IService<T>{
 
     constructor(
         pathApi: string,
-        protected http: HttpClient) {
+        protected http: HttpClient,
+        private notification: NotificationService) {
         this.isLoadingSubject = new BehaviorSubject<boolean>(false);
 
         this.apiUrl = `${environment.apiUrl}/${pathApi}`;
@@ -23,9 +25,12 @@ export abstract class ServiceBase<T> implements IService<T>{
         this.isLoadingSubject.next(true);
         return this.http.post<T>(this.apiUrl, model)
             .pipe(
-                map(result => result),
+                map(result => {
+                    this.notification.showSuccess('Criado com sucesso!', 'Sucesso');
+                    return result;
+                }),
                 catchError((err) => {
-                    console.error('Erro create', err);
+                    this.notification.showError(err, 'Erro ao criar');
                     return of(undefined);
                 }),
                 finalize(() => this.isLoadingSubject.next(false))
@@ -33,7 +38,15 @@ export abstract class ServiceBase<T> implements IService<T>{
     }
 
     findById(id: string): Observable<T | undefined> {
-        return this.find('id', id).pipe(map(res => res?.data));
+        return this.find('id', id).pipe(
+            map((result: any) => {
+                if (!result || !result.data) {
+                    this.notification.showInfo('Nenhum resultado encontrado', 'Não encontrado');
+                }
+                return result?.data;
+            }),
+            finalize(() => this.isLoadingSubject.next(false))
+        );
     }
 
     find(field?: string, value?: string): Observable<Result | undefined> {
@@ -44,7 +57,12 @@ export abstract class ServiceBase<T> implements IService<T>{
         this.isLoadingSubject.next(true);
         return this.http.get<Result>(url)
             .pipe(
-                map(result => result),
+                map((result: any) => {
+                    if (!result || result.data.length === 0) {
+                        this.notification.showInfo('Nenhum resultado encontrado', 'Não encontrado');
+                    }
+                    return result;
+                }),
                 finalize(() => this.isLoadingSubject.next(false))
             );
     }
@@ -53,9 +71,12 @@ export abstract class ServiceBase<T> implements IService<T>{
         this.isLoadingSubject.next(true);
         return this.http.put<Result>(`${this.apiUrl}/${id}`, model)
             .pipe(
-                map(result => result.data),
+                map(result => {
+                    this.notification.showSuccess('Alterado com sucesso!', 'Sucesso');
+                    return result.data;
+                }),
                 catchError((err) => {
-                    console.error('Erro create', err);
+                    this.notification.showError(err, 'Erro na alteração');
                     return of(undefined);
                 }),
                 finalize(() => this.isLoadingSubject.next(false))
@@ -68,7 +89,7 @@ export abstract class ServiceBase<T> implements IService<T>{
             .pipe(
                 map(res => res),
                 catchError((err) => {
-                    console.error('Erro deletar: ', err);
+                    this.notification.showError(err, 'Erro ao deletar');
                     return of(undefined);
                 }),
                 finalize(() => this.isLoadingSubject.next(false))
@@ -80,6 +101,10 @@ export abstract class ServiceBase<T> implements IService<T>{
         return this.http.patch(`${this.apiUrl}/${id}/${StatusEnum.INATIVO}`, { status: StatusEnum.INATIVO })
             .pipe(
                 map(res => res),
+                catchError((err) => {
+                    this.notification.showError(err, 'Erro ao disabilitar');
+                    return of(undefined);
+                }),
                 finalize(() => this.isLoadingSubject.next(false))
             );
     }
@@ -89,6 +114,10 @@ export abstract class ServiceBase<T> implements IService<T>{
         return this.http.patch(`${this.apiUrl}/${id}`, body)
             .pipe(
                 map(res => res),
+                catchError((err) => {
+                    this.notification.showError(err, 'Erro ao alterar item');
+                    return of(undefined);
+                }),
                 finalize(() => this.isLoadingSubject.next(false))
             );
     }

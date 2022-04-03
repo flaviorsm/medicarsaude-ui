@@ -126,7 +126,6 @@ export class RegistrarVendaComponent extends RegisterComponent<VendaModel, Venda
 
   searchCliente(): void {
     this.clienteService.find('cpf', this.formControl.cpf.value).subscribe(result => {
-      console.log(result);
       if (result && result.data.length > 0) {
         this.cliente = result.data[0];
         this.clienteToForm(this.cliente);

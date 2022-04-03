@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ServiceBase } from '@medicar/core';
+import { NotificationService } from '..';
 import { ContratoModel } from './../../models/contrato.model';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { ContratoModel } from './../../models/contrato.model';
 })
 export class ContratoService extends ServiceBase<ContratoModel> {
 
-  constructor(http: HttpClient) {
-    super('contratos', http);
+  constructor(http: HttpClient, notification: NotificationService) {
+    super('contratos', http, notification);
   }
 }
