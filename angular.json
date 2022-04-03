@@ -63,13 +63,21 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
                 }
               ]
             }
@@ -84,6 +92,9 @@
           "configurations": {
             "production": {
               "browserTarget": "medicarsaude-ui:build:production"
+            },
+            "staging": {
+              "browserTarget": "medicarsaude-ui:build:staging"
             }
           }
         },

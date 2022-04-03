@@ -1,0 +1,23 @@
+input.currency {
+    text-align: right;
+    padding-right: 15px;
+}
+
+hr {
+    padding: 0;
+    margin: 10px;
+    border: thin solid #ecf0f3;
+}
+
+.card-body h2 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 20px;
+    padding: 0.5rem 0 1.5rem 2rem;
+}
+
+.disable {
+    pointer-events: none;
+}

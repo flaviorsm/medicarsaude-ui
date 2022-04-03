@@ -1,15 +1,14 @@
-import { ServiceBase } from '@medicar/core/base/service-base';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClienteModel } from '@medicar/core';
-import { HttpClient } from '@angular/common/http';
-import { TokenStorageService } from '..';
+import { ServiceBase } from '@medicar/core/base/service-base';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService extends ServiceBase<ClienteModel> {
 
-  constructor(http: HttpClient, tokenStorageService: TokenStorageService) {
-    super('clientes', http, tokenStorageService);
+  constructor(http: HttpClient) {
+    super('clientes', http);
   }
 }

@@ -7,10 +7,10 @@ export class UsuarioModel {
     telefone: string;
     cpf: string;
     senha: string;
-    dataNascimento?: Date;
+    dataNascimento: Date;
     usuario: string;
     status?: StatusEnum;
-    regra?: RoleEnum;
+    regra: RoleEnum;
 
     constructor(model: UsuarioModel) {
         this.nome = model.nome;
@@ -20,5 +20,6 @@ export class UsuarioModel {
         this.usuario = model.usuario;
         this.senha = model.senha;
         this.dataNascimento = model.dataNascimento;
+        this.regra = model.regra;
     }
 }

@@ -1,0 +1,67 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-custom card-stretch gutter-b">
+                <div class="row card-header border-0 pt-5">
+                    <div class="col-10">
+                        <h1 class="card-title font-weight-bolder text-dark">Parceiro</h1>
+                        <h2 class="text-muted font-weight-bold font-size-lg">Lista de parceiros</h2>
+                    </div>
+                    <div class="col-2">
+                        <button *ngIf="verificarRegra([roleEnum.ADMINISTRADOR, roleEnum.COLABORADOR])" type="button" class="btn btn-primary float-end" [routerLink]="['/parceiro/registrar']">
+                            Novo Parceiro
+                        </button>
+                    </div>
+                </div>
+                <hr />
+                <div class="row card-header border-0 pt-5">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <div class="text-start font-weight-bolder text-dark">
+                            Pesquisar:
+                        </div>
+                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                            <input type="search" class="form-control form-control-dark" placeholder="Digite o nome..."
+                                aria-label="Search" [(ngModel)]="search" name="search">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card-body pt-2 pb-0 mt-5 table-responsive-sm">
+                    <table class="table table-striped table-image">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Documento</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" *ngIf="verificarRegra([roleEnum.ADMINISTRADOR, roleEnum.COLABORADOR])">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listModels | filter:'nome':search; let i = index">
+                                <th scope="row">{{ item.categoria.nome }}</th>
+                                <td>{{ item.cnpj ??  item.cpf }}</td>
+                                <td>{{ item.nome }}</td>
+                                <td>{{ item.telefone }}</td>
+                                <td>{{ item.email }}</td>
+                                <td>{{ statusEnum[item.status] }}</td>
+                                <td *ngIf="verificarRegra([roleEnum.ADMINISTRADOR, roleEnum.COLABORADOR])">
+                                    <button type="button" class="btn btn-success btn-outline-primary mr-1"
+                                        [routerLink]="['/parceiro/registrar/'+ item.id]">
+                                        <i class="bi bi-card-list"></i>
+                                    </button>
+                                    <button *ngIf="verificarRegra([roleEnum.ADMINISTRADOR])" type="button" class="btn btn-danger btn-outline-primary"
+                                        (click)="disable(item.id)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

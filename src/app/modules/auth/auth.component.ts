@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from '@medicar/core/services';
 
 @Component({
   selector: 'rts-auth',

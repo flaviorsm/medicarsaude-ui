@@ -1,0 +1,146 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-custom card-stretch gutter-b">
+                <div class="row card-header border-0 pt-5">
+                    <div class="col-12">
+                        <h1 class="card-title font-weight-bolder text-dark">Usuário</h1>
+                        <h2 class="text-muted font-weight-bold font-size-lg">
+                            {{ isUpdate ? 'Atualizar informações do' : 'Inserir novo' }} usuário
+                        </h2>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="card-body pt-2 pb-0 mt-5">
+                    <ng-container *ngIf="hasError">
+                        <div class="mb-10 alert alert-custom alert-light-danger alert-dismissible">
+                            <div class="alert-text">{{ message }}</div>
+                        </div>
+                    </ng-container>
+                    <form class="form flex-center" novalidate="novalidate" [formGroup]="form">
+                        <div class="form-group row">
+                            <div class="col-8">
+                                <label for="nome" class="font-weight-bolder text-dark">Nome</label>
+                                <input #nome id="nome"
+                                    class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    type="text" name="nome" formControlName="nome" autocomplete="off" required
+                                    [ngClass]="{ 'is-invalid': formControl.nome.invalid && formControl.nome.touched }"
+                                    tabindex="1" />
+                                <div *ngIf="formControl.nome.invalid && formControl.nome.touched" class="alert">
+                                    <div *ngIf="formControl.nome.errors.required">
+                                        <span>Campo Obrigatório</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <label for="status" class="font-weight-bolder text-dark">Tipo:</label>
+                                <select [ngClass]="{disable: !verificarRegra([roleEnum.ADMINISTRADOR])}" class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    name="regra" formControlName="regra" tabindex="10" [ngModel]="roleEnum"
+                                    tabindex="10">
+                                    <option *ngFor="let value of regraEnumKeys" [ngValue]="value">{{
+                                        roleEnum[value] }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <label for="email" class="font-weight-bolder text-dark">E-mail</label>
+                                <input #email id="email"
+                                    class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    type="email" name="email" formControlName="email" autocomplete="off" required
+                                    [ngClass]="{ 'is-invalid': formControl.email.invalid && formControl.email.touched }"
+                                    tabindex="2" />
+                                <div *ngIf="formControl.email.invalid && formControl.email.touched" class="alert">
+                                    <div *ngIf="formControl.email.errors.required">
+                                        <span>E-mail obrigatório!</span>
+                                    </div>
+                                    <div *ngIf="formControl.email.errors.email">
+                                        <span>E-mail inválido!</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="dataNascimento" class="font-weight-bolder text-dark">Data de
+                                    Nascimento</label>
+                                <input #dataNascimento id="dataNascimento"
+                                    class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    type="date" name="dataNascimento" formControlName="dataNascimento"
+                                    autocomplete="off" required
+                                    [ngClass]="{ 'is-invalid': formControl.dataNascimento.invalid && formControl.dataNascimento.touched }"
+                                    tabindex="3" />
+                                <div *ngIf="formControl.dataNascimento.invalid && formControl.dataNascimento.touched"
+                                    class="alert">
+                                    <div *ngIf="formControl.dataNascimento.errors.required">
+                                        <span>Data obrigatória!</span>
+                                    </div>
+                                    <div *ngIf="formControl.dataNascimento.errors.invalidDate">
+                                        <span>Data inválida!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <label for="telefone" class="font-weight-bolder text-dark">Telefone</label>
+                                <input #telefone id="telefone" rtsMask="(00)00000-0000"
+                                    class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    type="tel" name="telefone" formControlName="telefone" autocomplete="off" required
+                                    [ngClass]="{ 'is-invalid': formControl.telefone.invalid && formControl.telefone.touched }"
+                                    tabindex="4" />
+                                <div *ngIf="formControl.telefone.invalid && formControl.telefone.touched" class="alert">
+                                    <div *ngIf="formControl.telefone.errors.required">
+                                        <span>Campo Obrigatório</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="cpf" class="font-weight-bolder text-dark">CPF</label>
+                                <input #cpf id="cpf" rtsMask="000.000.000-00"
+                                    class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    type="text" name="cpf" formControlName="cpf" autocomplete="off" required
+                                    [ngClass]="{ 'is-invalid': formControl.cpf.invalid && formControl.cpf.touched }"
+                                    tabindex="5" />
+                                <div *ngIf="formControl.cpf.invalid && formControl.cpf.touched" class="alert">
+                                    <div *ngIf="formControl.cpf.errors.required">
+                                        <span>Campo Obrigatório</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <label for="senha" class="font-weight-bolder text-dark">Senha</label>
+                                <input id="senha"
+                                    class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    type="password" name="senha" autocomplete="off" required formControlName="senha"
+                                    tabindex="6" />
+                            </div>
+                            <div class="col-6">
+                                <label for="confirmaSenha" class="font-weight-bolder text-dark">Confirma Senha</label>
+                                <input id="confirmaSenha"
+                                    class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6"
+                                    type="password" name="confirmaSenha" autocomplete="off" required
+                                    formControlName="confirmaSenha" tabindex="7" />
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+
+                <div class="card-footer pt-2 pb-0 mt-5">
+                    <div class="p-4 d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-danger" (click)="back()">CANCELAR</button>
+                        <button type="button" class="btn btn-primary" (click)="register(idEntity)">SALVAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

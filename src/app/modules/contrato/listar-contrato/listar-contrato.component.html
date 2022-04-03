@@ -1,0 +1,56 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-custom card-stretch gutter-b">
+                <div class="row card-header border-0 pt-5">
+                    <div class="col-10">
+                        <h1 class="card-title font-weight-bolder text-dark">Contrato</h1>
+                        <h2 class="text-muted font-weight-bold font-size-lg">Lista de contratos gerados</h2>
+                    </div>
+                </div>
+                <hr />
+                <div class="row card-header border-0 pt-5">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <div class="text-start font-weight-bolder text-dark">
+                            Pesquisar:
+                        </div>
+                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                            <input type="search" class="form-control form-control-dark" placeholder="Digite o Código..."
+                                aria-label="Search" [(ngModel)]="search" name="search">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card-body pt-2 pb-0 mt-5 table-responsive-sm">
+                    <table class="table table-striped table-image">
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Vendedor</th>
+                                <th scope="col">Plano</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listModels | filter:'codigo':search; let i = index">
+                                <th scope="row">{{ item.codigo }}</th>
+                                <td>{{ item.venda.cliente.nome }}</td>
+                                <td>{{ item.venda.vendedor.nome }}</td>
+                                <td>{{ item.venda.plano.nome }}</td>
+                                <td>{{ statusEnum[item.status] }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-outline-primary mr-1"
+                                        [routerLink]="['/contrato/registrar/']" [state]="item" title="Detalhes do contrato">
+                                        <i class="bi bi-card-list"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

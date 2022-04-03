@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '@medicar/core/services';
 import { ChartOptions } from 'chart.js';
 
 @Component({
@@ -8,7 +9,9 @@ import { ChartOptions } from 'chart.js';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RoleEnum } from '@medicar/core';
+import { Util } from '@medicar/core/shared/util';
 
 @Component({
   selector: 'rts-menu',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  roleEnum = RoleEnum;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  verificarRegra(regras: number[]): boolean {
+    return Util.hasPermission(regras);
   }
 
 }

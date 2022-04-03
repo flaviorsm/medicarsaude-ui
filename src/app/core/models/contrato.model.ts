@@ -1,9 +1,10 @@
-import { StatusEnum } from '@medicar/core';
+import { PagamentoModel, StatusEnum } from '@medicar/core';
 
 export class ContratoModel {
+    id?: string;
     codigo!: string;
     status!: StatusEnum;
-    plano!: string;
-    cliente!: string;
-    vendedor!: string;
+    plano?: any;
+    venda?: any;
+    pagamentos?: PagamentoModel[];
 }

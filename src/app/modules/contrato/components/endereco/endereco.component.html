@@ -1,0 +1,30 @@
+<div class="row" *ngIf="endereco">
+    <hr />
+    <div class="row mb-3">
+        <label for="cep" class="col-sm-1 col-form-label text-end">CEP:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="cep" name="cep" disabled [(ngModel)]="endereco.cep" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="rua" class="col-sm-1 col-form-label text-end">Rua:</label>
+        <div class="col-sm-11">
+            <input type="text" class="form-control" id="rua" name="rua" disabled [(ngModel)]="endereco.rua" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="bairro" class="col-sm-1 col-form-label text-end">Bairro:</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="bairro" name="bairro" disabled [(ngModel)]="endereco.bairro" />
+        </div>
+        <label for="cidade" class="col-sm-1 col-form-label text-end">Cidade:</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="cidade" name="cidade" disabled [(ngModel)]="endereco.cidade" />
+        </div>
+        <label for="estado" class="col-sm-1 col-form-label text-end">Estado:</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control text-uppercase" id="estado" name="estado" disabled
+                [(ngModel)]="endereco.estado" />
+        </div>
+    </div>
+</div>

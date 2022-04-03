@@ -1,39 +1,29 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StatusEnum } from '@medicar/core';
+import { Result } from './../interfaces/result';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { IService } from '..';
-import { TokenStorageService } from '../services';
 
 export abstract class ServiceBase<T> implements IService<T>{
 
     isLoadingSubject!: BehaviorSubject<boolean>;
-    private apiUrl = '';
+    protected apiUrl: string;
 
     constructor(
         pathApi: string,
-        private http: HttpClient,
-        private tokenStorageService: TokenStorageService) {
+        protected http: HttpClient) {
         this.isLoadingSubject = new BehaviorSubject<boolean>(false);
 
         this.apiUrl = `${environment.apiUrl}/${pathApi}`;
     }
 
-    get httpHeaders(): HttpHeaders | undefined {
-        const auth = this.tokenStorageService.getAuthLocalStorage();
-        if (auth && auth.token) {
-            return new HttpHeaders({
-                token: `${auth.token}`,
-            });
-        }
-        return undefined;
-    }
-
     create(model: T): Observable<T | undefined> {
         this.isLoadingSubject.next(true);
-        return this.http.post<any>(this.apiUrl, model, { headers: this.httpHeaders })
+        return this.http.post<T>(this.apiUrl, model)
             .pipe(
-                map(res => res.data),
+                map(result => result),
                 catchError((err) => {
                     console.error('Erro create', err);
                     return of(undefined);
@@ -43,31 +33,27 @@ export abstract class ServiceBase<T> implements IService<T>{
     }
 
     findById(id: string): Observable<T | undefined> {
-        return this.find('id', id).pipe(
-            map(res => res && res.length > 0 ? res[0] : undefined));
+        return this.find('id', id).pipe(map(res => res?.data));
     }
 
-    find(field?: string, value?: string): Observable<T[] | undefined> {
+    find(field?: string, value?: string): Observable<Result | undefined> {
+        let url = this.apiUrl;
         if (field && value) {
-            this.apiUrl += `?%${field}=${value}`;
+            url += `?${field}=${value}`;
         }
         this.isLoadingSubject.next(true);
-        return this.http.get<any>(this.apiUrl, { headers: this.httpHeaders })
+        return this.http.get<Result>(url)
             .pipe(
-                map(res => res.data),
-                catchError((err) => {
-                    console.error('Erro getVendas', err);
-                    return of(undefined);
-                }),
+                map(result => result),
                 finalize(() => this.isLoadingSubject.next(false))
             );
     }
 
     update(id: string, model: T): Observable<T | undefined> {
         this.isLoadingSubject.next(true);
-        return this.http.put<any>(`${this.apiUrl}/${id}`, model, { headers: this.httpHeaders })
+        return this.http.put<Result>(`${this.apiUrl}/${id}`, model)
             .pipe(
-                map(res => res.data),
+                map(result => result.data),
                 catchError((err) => {
                     console.error('Erro create', err);
                     return of(undefined);
@@ -78,13 +64,31 @@ export abstract class ServiceBase<T> implements IService<T>{
 
     delete(id: string): Observable<any> {
         this.isLoadingSubject.next(true);
-        return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.httpHeaders })
+        return this.http.delete(`${this.apiUrl}/${id}`)
             .pipe(
                 map(res => res),
                 catchError((err) => {
-                    console.error('Erro getVendas', err);
+                    console.error('Erro deletar: ', err);
                     return of(undefined);
                 }),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+
+    disable(id: string): Observable<any> {
+        this.isLoadingSubject.next(true);
+        return this.http.patch(`${this.apiUrl}/${id}/${StatusEnum.INATIVO}`, { status: StatusEnum.INATIVO })
+            .pipe(
+                map(res => res),
+                finalize(() => this.isLoadingSubject.next(false))
+            );
+    }
+
+    path(id: string, body: any): Observable<any> {
+        this.isLoadingSubject.next(true);
+        return this.http.patch(`${this.apiUrl}/${id}`, body)
+            .pipe(
+                map(res => res),
                 finalize(() => this.isLoadingSubject.next(false))
             );
     }

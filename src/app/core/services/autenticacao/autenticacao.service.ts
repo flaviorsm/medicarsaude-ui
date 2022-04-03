@@ -92,6 +92,8 @@ export class AutenticacaoService implements OnDestroy {
         map(user => {
           if (user) {
             this.currentUserSubject = new BehaviorSubject<UsuarioModel>(user);
+            auth.usuario = user;
+            this.tokenStorageService.setAuthLocalStorage(auth);
           } else {
             this.logout();
           }
@@ -115,6 +117,22 @@ export class AutenticacaoService implements OnDestroy {
         return user;
       }),
       switchMap(() => this.login(model.usuario || '', model.senha)),
+      catchError((err) => {
+        console.error('err', err);
+        return of(undefined);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
+  update(idEntity: string, model: UsuarioModel): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.usuarioService.update(idEntity, model).pipe(
+      map((user) => {
+        this.isLoadingSubject.next(false);
+        return user;
+      }),
+      switchMap(() => this.router.navigate(['/dashboard'])),
       catchError((err) => {
         console.error('err', err);
         return of(undefined);

@@ -1,17 +1,25 @@
-export class VendaModel {
-    _id: string;
-    codigo: string;
-    cliente: string;
-    plano: string;
-    vendedor: string;
-    dataVenda: Date;
+import { ContratoModel } from './contrato.model';
+import { StatusPagamentoEnum } from '../enums/status-pagamento.enum';
+import { Util } from '../shared/util';
 
-    constructor() {
-        this._id = '';
-        this.codigo = '';
-        this.cliente = '';
-        this.plano = '';
-        this.vendedor = '';
-        this.dataVenda = {} as Date;
+export class VendaModel {
+    id?: string;
+    codigo?: string;
+    cliente: any;
+    plano: any;
+    vendedor: any;
+    dataVenda: Date;
+    diaVencimento: number;
+    statusPagamento: StatusPagamentoEnum;
+    contrato!: ContratoModel;
+
+    constructor(model: VendaModel) {
+        this.codigo = model.codigo ?? Util.codigoAleatorio();
+        this.cliente = model.cliente;
+        this.plano = model.plano;
+        this.vendedor = model.vendedor;
+        this.dataVenda = model.dataVenda;
+        this.statusPagamento = model.statusPagamento;
+        this.diaVencimento = model.diaVencimento;
     }
 }

@@ -2,3 +2,43 @@
   background-image: linear-gradient(#b1d7ed, #b1e7ee);
   margin-bottom: 0 !important;
 }
+
+.title-medicar {
+  font-size: 8em;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 400;
+  color: #296870;
+  margin-left: 2.5vw;
+}
+
+.logo-medicar {
+  padding: 0;
+  img {
+    width: 10em;
+    height: auto;
+  }
+}
+
+.person-img {
+  font-size: 16pt;
+}
+
+@media (max-width: 575.98px) {
+  .logo-medicar {
+    img {
+      width: 5em;
+      height: auto;
+      margin-right:50px;
+    }
+  }
+  .person-img,
+  .title-medicar {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 992px) and (max-width: 1399.98px) {
+}

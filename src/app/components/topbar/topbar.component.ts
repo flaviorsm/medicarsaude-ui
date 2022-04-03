@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AutenticacaoService } from '@medicar/core/services';
+import { TokenStorageService } from '@medicar/core/services';
 
 @Component({
   selector: 'rts-topbar',
@@ -8,14 +8,14 @@ import { AutenticacaoService } from '@medicar/core/services';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor(private authService: AutenticacaoService) { }
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
   }
 
   get isLoggedIn(): boolean {
-    const user = this.authService.currentUserValue;
-    if (user) {
+    const auth = this.tokenStorageService.getAuthLocalStorage();
+    if (auth) {
       return true;
     }
     return false;

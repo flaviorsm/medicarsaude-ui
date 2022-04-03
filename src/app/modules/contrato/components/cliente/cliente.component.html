@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="row mb-3">
+        <div class="col-sm-1 text-end">
+            <label for="cpf" class="col-form-label">CPF:</label>
+        </div>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="cpf" name="cpf" disabled [(ngModel)]="cliente.cpf" />
+        </div>
+        <div class="col-sm-2 text-end">
+            <label for="dataNascimento" class="col-form-label">Data Nascimento:</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" disabled
+                [(ngModel)]="dataNascimento" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-1 text-end">
+            <label for="nome" class="col-form-label">Nome:</label>
+        </div>
+        <div class="col-sm-11">
+            <input type="text" class="form-control" id="nome" name="nome" disabled [(ngModel)]="cliente.nome" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-1 text-end">
+            <label for="email" class="col-form-label">E-mail:</label>
+        </div>
+        <div class="col-sm-5">
+            <input type="email" class="form-control" id="email" name="email" disabled [(ngModel)]="cliente.email" />
+        </div>
+        <div class="col-sm-2 text-end">
+            <label for="telefone" class="col-form-label">Telefone:</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="tel" class="form-control" id="telefone" name="telefone" disabled
+                [(ngModel)]="cliente.telefone" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="status" class="col-sm-1 col-form-label text-end">Status:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="status" name="status" disabled [(ngModel)]="statusPlano" />
+        </div>
+    </div>
+    <rts-endereco [endereco]="cliente.endereco"></rts-endereco>
+</div>

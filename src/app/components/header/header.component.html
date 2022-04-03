@@ -1,23 +1,25 @@
 <header class="py-3 mb-4 border-bottom bg-header">
   <div class="container d-flex flex-wrap justify-content-center align-items-center">
-    <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32">
-        <use xlink:href="#bootstrap" />
-      </svg>
-      <span class="fs-4">
-        <img src="./assets/media/logos/medicar_logo_3-icone.png" alt="Logo Medicar" width="100px" />
-      </span>
-    </a>
-    <div class="col-12 col-lg-auto mb-3 mb-lg-0">
-      <div class="dropdown">
-
-        <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown"><i class="bi bi-person-fill"></i>Usuário
-          Logado</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['/usuario/']">Editar</a>
-          <a class="dropdown-item" [routerLink]="['/auth/logout']">Sair</a>
-        </div>
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <div class="bi logo-medicar">
+        <img src="./assets/media/logos/medicar_logo_3-icone.png" alt="Logo Medicar" />
       </div>
+      <h1 class="fs-4 mb-3 title-medicar">Medicar Saúde</h1>
+    </a>
+    <div class="dropdown text-end text-center">
+      <span class="bi bi-person-circle mb-4 person-img"></span>
+      <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        {{usuario?.usuario?.nome}}
+      </a>
+      <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+        <li><a class="dropdown-item" [routerLink]="['/usuario/registrar/' + usuario?.userId]">Perfil</a></li>
+        <li><a class="dropdown-item" [routerLink]="['/usuario']" *ngIf="regra === roleEnum.ADMINISTRADOR">Administrar</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" [routerLink]="['/auth/logout']">Sair</a></li>
+      </ul>
     </div>
   </div>
 </header>

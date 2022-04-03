@@ -5,7 +5,7 @@
 </ng-container>
 <form class="form flex-center" novalidate="novalidate" [formGroup]="registrationForm" (ngSubmit)="registrar()">
     <div class="pb-13 pt-lg-0 pt-5 text-center">
-        <h3>CRIAR CONTA</h3>
+        <h3>{{idEntity ? 'ALTERAR' : 'CRIAR'}} CONTA</h3>
     </div>
     <div class="form-group row">
         <div class="col-12">
@@ -38,8 +38,8 @@
         </div>
         <div class="col-6">
             <label for="dataNascimento" class="font-weight-bolder text-dark">Data de Nascimento</label>
-            <input #dataNascimento id="dataNascimento" rtsMask="00/00/0000"
-                class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6" type="text"
+            <input #dataNascimento id="dataNascimento"
+                class="form-control form-control-solid h-auto py-3 px-6 rounded-lg font-size-h6" type="date"
                 name="dataNascimento" formControlName="dataNascimento" autocomplete="off" required
                 [ngClass]="{ 'is-invalid': f.dataNascimento.invalid && f.dataNascimento.touched }" tabindex="3" />
             <div *ngIf="f.dataNascimento.invalid && f.dataNascimento.touched" class="alert">
