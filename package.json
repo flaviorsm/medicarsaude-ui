@@ -4,12 +4,12 @@
   "scripts": {
     "config": "ts-node ./src/config-env.ts",
     "ng": "ng",
-    "start": "npm run config -- && node server.js",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "npm run config -- && ng build --configuration production"
+    "heroku-postbuild": "ng build --configuration production"
   },
   "engines": {
     "node": "16.14.2",
