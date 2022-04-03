@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsuarioModel } from '@medicar/core';
+import { RoleEnum, UsuarioModel } from '@medicar/core';
 import { AutenticacaoService } from '@medicar/core/services';
 import { UsuarioService } from '@medicar/core/services/usuario/usuario.service';
 import { Util } from '@medicar/core/shared/util';
@@ -84,6 +84,7 @@ export class RegistrationComponent implements OnInit {
         dataNascimento: this.f.dataNascimento.value,
         usuario: this.f.email.value.toLowerCase(),
         senha: this.f.senha.value,
+        regra: RoleEnum.CLIENTE
       });
       if (this.idEntity) {
         this.atualizar(this.idEntity, newUser);

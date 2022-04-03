@@ -150,6 +150,10 @@ export class RegistrarParceiroComponent extends RegisterComponent<ParceiroModel,
     }
   }
 
+  onSelectAll(items: any): void {
+    this.selectedPlanos = items;
+  }
+
   onItemSelect(item: any): void {
     this.categoriaSelected = item;
     if (this.ehClinica) {

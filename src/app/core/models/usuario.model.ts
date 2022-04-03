@@ -1,4 +1,4 @@
-import { RoleEnum, StatusEnum, AuthModel } from '@medicar/core';
+import { RoleEnum, StatusEnum } from '@medicar/core';
 
 export class UsuarioModel {
     id?: string;
@@ -10,7 +10,7 @@ export class UsuarioModel {
     dataNascimento: Date;
     usuario: string;
     status?: StatusEnum;
-    regra?: RoleEnum;
+    regra: RoleEnum;
 
     constructor(model: UsuarioModel) {
         this.nome = model.nome;
@@ -20,5 +20,6 @@ export class UsuarioModel {
         this.usuario = model.usuario;
         this.senha = model.senha;
         this.dataNascimento = model.dataNascimento;
+        this.regra = model.regra;
     }
 }

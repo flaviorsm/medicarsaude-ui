@@ -1,5 +1,3 @@
-import { UsuarioModel } from './../../core/models/usuario.model';
-import { TokenStorageService } from '@medicar/core/services';
 import { Component, OnInit } from '@angular/core';
 import { RoleEnum } from '@medicar/core';
 import { Util } from '@medicar/core/shared/util';

@@ -1,8 +1,7 @@
-import { AuthModel } from './../models/auth.model';
-import { StatusEnum } from './../enums/status.enum';
-import { StatusPagamentoEnum } from './../enums/status-pagamento.enum';
-import { RoleEnum } from '../enums/role.enum';
 import { environment } from '@environments/environment';
+import { StatusPagamentoEnum } from './../enums/status-pagamento.enum';
+import { StatusEnum } from './../enums/status.enum';
+import { AuthModel } from './../models/auth.model';
 
 export class Util {
 
