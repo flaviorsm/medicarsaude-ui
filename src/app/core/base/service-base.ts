@@ -87,7 +87,10 @@ export abstract class ServiceBase<T> implements IService<T>{
         this.isLoadingSubject.next(true);
         return this.http.delete(`${this.apiUrl}/${id}`)
             .pipe(
-                map(res => res),
+                map(result => {
+                    this.notification.showSuccess('Excluido com sucesso!', 'Sucesso');
+                    return result;
+                }),
                 catchError((err) => {
                     this.notification.showError(err, 'Erro ao deletar');
                     return of(undefined);
