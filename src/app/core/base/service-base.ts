@@ -103,7 +103,10 @@ export abstract class ServiceBase<T> implements IService<T>{
         this.isLoadingSubject.next(true);
         return this.http.patch(`${this.apiUrl}/${id}/${StatusEnum.INATIVO}`, { status: StatusEnum.INATIVO })
             .pipe(
-                map(res => res),
+                map(result => {
+                    this.notification.showSuccess('Disabilitado com sucesso!', 'Sucesso');
+                    return result;
+                }),
                 catchError((err) => {
                     this.notification.showError(err, 'Erro ao disabilitar');
                     return of(undefined);
@@ -116,7 +119,10 @@ export abstract class ServiceBase<T> implements IService<T>{
         this.isLoadingSubject.next(true);
         return this.http.patch(`${this.apiUrl}/${id}`, body)
             .pipe(
-                map(res => res),
+                map(result => {
+                    this.notification.showSuccess('Item alterado com sucesso!', 'Sucesso');
+                    return result;
+                }),
                 catchError((err) => {
                     this.notification.showError(err, 'Erro ao alterar item');
                     return of(undefined);
